@@ -1,0 +1,400 @@
+
+@media (min-width: 1200px) {
+.container-fluid-full {
+    height: 100%;	
+    overflow: hidden;
+    position: relative;
+}
+#content {
+    margin-bottom: 0;
+    margin-left: 14.422% !important;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 0;
+    width: 85.578%;
+}
+#sidebar-left {
+    background: #3a3a3a none repeat scroll 0 0;
+    height: 100%;
+    margin-left: 0 !important;
+    overflow-y: auto;
+    position: absolute;
+}
+.sidebar-nav > ul {
+    margin: 0;
+}
+footer {
+    margin: 0;
+    padding: 10px 20px;
+}
+}
+@media only screen and (min-width: 980px) and (max-width: 1199px) {
+.container-fluid-full {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#content {
+    margin-bottom: 0;
+    margin-left: 14.422% !important;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 20px;
+    width: 85.578%;
+}
+.dark {
+    margin-bottom: -56px;
+    margin-right: -30px;
+    padding: 20px;
+    right: -12px;
+    top: -20px;
+}
+#sidebar-left {
+    background: #3a3a3a none repeat scroll 0 0;
+    height: 100%;
+    margin-left: 0 !important;
+    overflow-y: auto;
+    position: absolute;
+}
+.sidebar-nav > ul {
+    margin: 0;
+}
+.sparkLineStats {
+    padding-bottom: 4px;
+    position: relative;
+}
+.sparkLineStats li {
+    font-size: 10px;
+    line-height: 42px;
+}
+.sparkLineStats li .number {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0;
+}
+.breadcrumb {
+    margin: -20px -20px 20px;
+}
+.statbox, .widget, .box, .circleStatsItemBox {
+    margin-bottom: 20px;
+}
+.task .desc {
+    display: inline-block;
+    font-size: 12px;
+    padding: 10px;
+    width: 70%;
+}
+.task .desc .title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.task .time {
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    padding: 10px;
+    text-align: right;
+    width: 20%;
+}
+.task .time .date {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+footer {
+    margin: 0;
+    padding: 10px 20px;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+.container-fluid-full {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#content {
+    margin-bottom: 0;
+    margin-left: 8.334% !important;
+    margin-right: 0;
+    margin-top: 0;
+    padding: 0;
+    width: 91.666%;
+}
+.dark {
+    margin-bottom: -56px;
+    margin-right: -30px;
+    padding: 20px;
+    right: -15px;
+    top: -22px;
+}
+.breadcrumb {
+    margin: -22px -22px 22px;
+}
+.statbox, .widget, .box, .circleStatsItemBox {
+    margin-bottom: 22px;
+}
+#sidebar-left {
+    background: #3a3a3a none repeat scroll 0 0;
+    height: 100%;
+    margin-left: 0 !important;
+    position: absolute;
+    width: 8.334% !important;
+}
+.sidebar-nav > ul {
+    margin: 0;
+}
+.nav-tabs.nav-stacked > li > a, .nav-tabs.nav-stacked > li > ul > li > a {
+    margin-top: -2px;
+    text-align: center;
+}
+.noMargin {
+    margin-left: 0 !important;
+}
+.btn-navbar {
+    display: none !important;
+}
+.nav-collapse, .nav-collapse.collapse {
+    height: auto !important;
+    margin-left: 0 !important;
+    overflow: visible !important;
+}
+.stats-date .range {
+    font-size: 16px;
+    font-weight: 300;
+}
+.stat .left .number {
+    font-size: 16px;
+    font-weight: 300;
+}
+.stat .left .title {
+    font-size: 9px;
+}
+.stat .right .percent {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+.box-small-link {
+    font-size: 20px;
+}
+.sparkLineStats {
+    padding-bottom: 10px;
+}
+.sparkLineStats li {
+    font-size: 10px;
+    line-height: 43px;
+}
+.sparkLineStats li .number {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0;
+}
+.task {
+    border-bottom: 1px solid #f9f9f9;
+    margin-bottom: 1px;
+}
+.task.high {
+    border-left: 2px solid rgba(250, 96, 61, 1);
+}
+.task.medium {
+    border-left: 2px solid rgba(250, 187, 61, 1);
+}
+.task.low {
+    border-left: 2px solid rgba(120, 205, 81, 1);
+}
+.task .desc {
+    display: inline-block;
+    font-size: 10px;
+    margin-right: -20px;
+    padding: 10px;
+    width: 65%;
+}
+.task .desc .title {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.task .time {
+    display: inline-block;
+    float: right;
+    font-size: 10px;
+    padding: 10px;
+    text-align: right;
+    width: 25%;
+}
+.task .time .date {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.timeslot .task span {
+    background: rgba(103, 194, 239, 0.1) none repeat scroll 0 0;
+    border: 2px solid rgba(103, 194, 239, 1);
+    display: block;
+    font-size: 10px;
+    padding: 5px;
+}
+.timeslot .task span span {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    padding: 0;
+}
+.timeslot .task span span.details {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.timeslot .task span span.remaining {
+    font-size: 12px;
+}
+footer {
+    margin: 0;
+    padding: 10px 20px;
+}
+}
+@media only screen and (max-width: 767px) {
+#content {
+    margin: -10px 0 0;
+    overflow: hidden;
+}
+.breadcrumb {
+    margin: -5px -5px 5px;
+}
+.nav-tabs.nav-stacked > li > a, .nav-tabs.nav-stacked > li > ul > li > a {
+    margin-top: -2px;
+}
+.dark {
+    border: 0 none;
+    margin-bottom: 0;
+    margin-right: 0;
+    padding: 5px;
+    position: relative;
+    right: 0;
+    top: 5px;
+}
+.statbox, .widget, .box, .circleStatsItemBox {
+    margin-bottom: 20px !important;
+}
+.task {
+    border-bottom: 1px solid #f9f9f9;
+    margin-bottom: 1px;
+}
+.task.high {
+    border-left: 2px solid rgba(250, 96, 61, 1);
+}
+.task.medium {
+    border-left: 2px solid rgba(250, 187, 61, 1);
+}
+.task.low {
+    border-left: 2px solid rgba(120, 205, 81, 1);
+}
+.task .desc {
+    display: inline-block;
+    font-size: 10px;
+    margin-right: -20px;
+    padding: 10px;
+    width: 65%;
+}
+.task .desc .title {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.task .time {
+    display: inline-block;
+    float: right;
+    font-size: 10px;
+    padding: 10px;
+    text-align: right;
+    width: 25%;
+}
+.task .time .date {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.timeslot .task span {
+    background: rgba(103, 194, 239, 0.1) none repeat scroll 0 0;
+    border: 2px solid rgba(103, 194, 239, 1);
+    border-radius: 4px;
+    display: block;
+    font-size: 10px;
+    padding: 5px;
+}
+.timeslot .task span span {
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    padding: 0;
+}
+.timeslot .task span span.details {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.timeslot .task span span.remaining {
+    font-size: 12px;
+}
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+body {
+    padding: 0;
+}
+#content {
+    padding: 5px;
+}
+.stat {
+    float: left;
+    margin: 10px 0 0;
+    width: 50%;
+}
+.quick-button, .quick-button-small {
+    margin-bottom: 20px;
+}
+.pull-right {
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+}
+.fc-button-today, .fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay {
+    display: none;
+}
+footer {
+    padding: 10px 20px;
+}
+}
+@media only screen and (max-width: 479px) {
+body {
+    padding: 0;
+}
+#content {
+    padding: 5px;
+}
+.stat {
+    float: left;
+    margin: 1% 0 0;
+    width: 100%;
+}
+.quick-button, .quick-button-small {
+    margin-bottom: 20px;
+}
+.pull-right {
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+}
+.fc-button-today, .fc-button-month, .fc-button-agendaWeek, .fc-button-agendaDay {
+    display: none;
+}
+table, .pagination {
+    font-size: 10px;
+}
+.pagination {
+    padding: 5px;
+}
+.ui-slider-handle {
+    margin-top: 1px !important;
+}
+.sliderVertical .ui-slider-handle {
+    margin: 0 0 -10px 1px !important;
+}
+footer {
+    display: none;
+}
+.jbox {
+    max-height: 360px;
+    top: 0 !important;
+}
+}
