@@ -1,12 +1,13 @@
 package com.suixue.user.domain;
 
+import com.suixue.common.DataEntity;
+
 /**
  * 用户实体类
  * @author suixue
  *
  */
-public class User {
-	private String id;
+public class User extends DataEntity{
 	private String name;
 	private String password;
 	public String getId() {

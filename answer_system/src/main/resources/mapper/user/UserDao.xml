@@ -3,18 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suixue.user.dao.UserDao">
 
-	<select id="validateUser" resultType="com.suixue.user.domain.User">
+	<select id="get" resultType="com.suixue.user.domain.User">
 		SELECT 
 			u.id,
 			u.name 
 		FROM
 			`user` u 
 		where 1 = 1
-			AND u.name=#{name} 
-			AND u.password=#{password}
+			AND u.name=#{name}
+			<if test="password!=null">
+				AND u.password=#{password}
+			</if> 
 	</select>
 	
-	<insert id="insertUser" parameterType="com.suixue.user.domain.User">
+	<insert id="insert" parameterType="com.suixue.user.domain.User">
 		INSERT INTO `user`(
 			`id`,
 			`name`,
