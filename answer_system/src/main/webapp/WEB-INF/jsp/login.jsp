@@ -10,29 +10,14 @@
 <title>答题系统</title>
 </head>
 <body>
-	<!-- <div class="container">
-		<form>
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#">登录</a></li>
-				<li><a href="#">注册</a></li>
-			</ul>
-			<div>
-				<label>用户名</label> <input type="text" placeholder="请输入用户名">
-			</div>
-			<div>
-				<label>密码</label> <input type="passwd" placeholder="请输入密码">
-			</div>
-			<button class="btn btn-inverse" type="button">确定</button>
-		</form>
-	</div> -->
 	<div class="container">
 		<form method="post" role="form" action="index.html">
-		
+
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#">登录</a></li>
 				<li><a href="#">注册</a></li>
 			</ul>
-			
+
 			<div class="form-group">
 
 				<div class="input-group">
