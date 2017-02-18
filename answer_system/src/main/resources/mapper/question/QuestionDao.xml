@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suixue.question.dao.QuestionDao">
+
+	<select id="getList" resultType="com.suixue.question.domain.Question">
+		SELECT 
+			q.id,
+			q.desc,
+			q.title,
+			q.type_id as "typeId",
+			q.create_user_id as "createUserId"
+		FROM
+			`question` q 
+		where 1 = 1
+	</select>
+	
+	<insert id="insert" parameterType="com.suixue.question.domain.Question">
+		INSERT INTO `question`(
+			`id`,
+			`desc`,
+			`title`,
+			`type_id`,
+			`create_user_id`,
+			`title`
+		)
+		VALUES
+		(
+			#{id},
+			#{desc},
+			#{title},
+			#{type_id},
+			#{create_user_id}
+		)
+	</insert>
+	
+	<update id="update">
+		update question set
+		desc = #{desc},
+		title = #{title},
+		type_id=#{typeId},
+		create_user_id = #{createUserId}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from question
+		where id=#{id}
+	</delete>
+</mapper>
