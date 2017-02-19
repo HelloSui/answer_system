@@ -35,8 +35,8 @@ $(function(){
 		<form method="post">
 
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#">登录</a></li>
-				<li><a href="#">注册</a></li>
+				<li class="active"><a href="javascript:void(0)">登录</a></li>
+				<li><a href="javascript:void(0)">注册</a></li>
 			</ul>
 
 			<div class="form-group">

@@ -56,29 +56,28 @@ form p {
 }
 
 .btn {
-	color:#fff;
+	color: #fff;
 	font-size: 14px;
 	line-height: 40px;
-	padding:0;
+	padding: 0;
 	display: inline-block;
 	cursor: pointer;
 	margin: 5px;
 	text-decoration: none !important;
 	width: 100px;
-	height:40px;
-	border-width:0;
+	height: 40px; border-width : 0;
 	background-color: #fff;
+	border-width: 0;
 }
 
-.btn:hover{
-	color:#fff;
+.btn:hover {
+	color: #fff;
 }
 
-.btn-red{
+.btn-red {
 	background-color: #f01400;
 	border-color: transparent;
 }
-
 
 .right {
 	float: right;
