@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+
 <style type="text/css">
 .ask-input {
 	height: 40px;
@@ -32,20 +33,121 @@ h4.ask-question {
 	line-height: 42px;
 	background: url("${ctx}/static/img/icon1.png") 0 -90px no-repeat;
 }
+
+.question-tags {
+	font-size: 14px;
+	padding: 0 9px;
+	line-height: 28px;
+	background-color: #fff;
+	border: 1px solid #d0d6d9;
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	text-decoration: none !important;
+}
+
+.save {
+	border: 2px solid #f01400;
+	margin: 4px;
+}
+
+form p {
+	margin: 10 auto;
+}
+
+.btn {
+	color:#fff;
+	font-size: 14px;
+	line-height: 40px;
+	padding:0;
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	text-decoration: none !important;
+	width: 100px;
+	height:40px;
+	border-width:0;
+	background-color: #fff;
+}
+
+.btn:hover{
+	color:#fff;
+}
+
+.btn-red{
+	background-color: #f01400;
+	border-color: transparent;
+}
+
+
+.right {
+	float: right;
+}
 </style>
+
+<script type="text/javascript">
+	$(function() {
+		$('.question-tags').bind('click', function() {
+			if ($(this).hasClass('save')) {
+				$(this).removeClass('save');
+			} else {
+				$(this).addClass("save");
+			}
+		});
+
+		$('#ques-sub-btn').click(function() {
+
+		});
+	});
+</script>
 </head>
 <body>
 	<!-- 包含头部 -->
 	<jsp:include page="header.jsp" />
 	<div class="container">
 		<div class="container-left">
-			<h1>提问</h1>
-			<div class="input-group">
-				<span class="input-group-addon">问题：</span> <input type="text"
-					class="ask-input form-control" placeholder="请一句话说明问题，以问号结尾" />
-			</div>
-			<div></div>
+			<form class="form-horizontal">
+				<h1>提问</h1>
+				<div class="control-group warning">
+					<div class="controls">
+						<input type="text" class="ask-input form-control"
+							placeholder="请一句话说明问题，以问号结尾" /> <span class="help-block"><font
+							color="red">A longer block of help text that breaks onto a
+								new line and may extend beyond one line.</font></span>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<textarea type="text" class="form-control" cols="20" rows="10"
+							placeholder="问题补充(选填)"></textarea>
+					</div>
+				</div>
+
+				<p>请选择问题分类</p>
+				<div class="control-group">
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
+
+
+				</div>
+
+				<div class="right">
+					<a id="ques-sub-btn" class="btn btn-red">提交</a>
+				</div>
+			</form>
+
 		</div>
+
 		<div class="container-right">
 			<h4 class="ask-question">提问注意</h4>
 			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>

@@ -33,7 +33,7 @@ public class QuestionController extends BaseController  {
         return success(allQuestionList);
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String register(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		
@@ -41,5 +41,12 @@ public class QuestionController extends BaseController  {
 		questionService.insert(questionTemp);
 		
 		return "redirect:login";
+	}
+	
+	@RequestMapping(value = "/ask", method = RequestMethod.GET)
+	public String askQuestion(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		return "ask";
 	}
 }
