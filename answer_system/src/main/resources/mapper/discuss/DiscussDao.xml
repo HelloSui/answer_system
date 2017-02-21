@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suixue.discuss.dao.DiscussDao">
+
+	<select id="getList" resultType="com.suixue.discuss.domain.Discuss">
+		SELECT 
+			d.id,
+			d.question_id as "questionId",
+			d.speaker_id as "speakerId",
+			d.listner_id as "listnerId",
+			d.content as "content"
+		FROM
+			`discuss` d 
+		where 1 = 1
+	</select>
+	
+	<select id="queryDiscussesByParam" resultType="com.suixue.discuss.domain.Discuss">
+        select  
+        	d.id,
+			d.question_id as "questionId",
+			d.speaker_id as "speakerId",
+			d.listner_id as "listnerId",
+			d.content as "content", 
+			d.create_time as createTime, 
+			d.update_time as updateTime
+        from `discuss` d 
+        where 1=1
+        <if test="id != null and id != ''">
+            and d.id = #{id}
+        </if>
+        <if test="content != null and content != ''">
+            and d.content LIKE CONCAT(CONCAT('%', #{content}), '%')
+        </if>
+        <if test="question_id != null and question_id != ''">
+            and d.question_id = #{questionId}
+        </if>
+        <if test="speaker_id != null and speaker_id != ''">
+            and d.speaker_id = #{speakerId}
+        </if>
+        <if test="listner_id != null and listner_id != ''">
+            and d.listner_id = #{listnerId}
+        </if>
+        order by d.create_time desc
+    </select>
+	
+	<insert id="insert" parameterType="com.suixue.discuss.domain.Discuss">
+		INSERT INTO `discuss`(
+			`id`,
+			`question_id`,
+			`speaker_id`,
+			`listner_id`,
+			`content`
+		)
+		VALUES
+		(
+			#{id},
+			#{questionId},
+			#{speakerId},
+			#{listnerId},
+			#{content}
+		)
+	</insert>
+	
+	<update id="update">
+		update discuss set
+		question_id = #{questionId},
+		speaker_id = #{speakerId},
+		listner_id=#{listnerId},
+		content = #{content},
+		update_time = #{updateTime}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from discuss
+		where id=#{id}
+	</delete>
+</mapper>

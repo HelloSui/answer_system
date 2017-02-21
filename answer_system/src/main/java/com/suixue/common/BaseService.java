@@ -37,6 +37,7 @@ public abstract class BaseService<T extends DataEntity, D extends BaseDao<T>> {
 	}
 
 	public void update(T entity) {
+		entity.setUpdateTime(new Date(System.currentTimeMillis()));
 		dao.update(entity);
 	}
 

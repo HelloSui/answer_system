@@ -48,7 +48,7 @@ public class QuestionServiceTest {
 	@Test
 	public void testInsert() {
 		Question question = new Question();
-		question.setId("3");
+		question.setId("5");
 		question.setDescription("test34");
 		question.setTitle("suixueefa");
 		question.setCreateUserId("3");

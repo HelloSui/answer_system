@@ -67,7 +67,8 @@
 		description = #{description},
 		title = #{title},
 		type_id=#{typeId},
-		create_user_id = #{createUserId}
+		create_user_id = #{createUserId},
+		update_time = #{updateTime}
 		where id=#{id}
 	</update>
 	
