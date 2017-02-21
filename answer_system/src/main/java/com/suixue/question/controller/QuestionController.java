@@ -25,22 +25,43 @@ public class QuestionController extends BaseController  {
 	@Autowired
 	private QuestionService questionService;
 	
-	@RequestMapping(value = "/query", method = RequestMethod.GET)
+	@RequestMapping(value = "/query/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse queryAllQuestion() throws Exception{
-		//List<Question> allQuestionList = questionService.getList();
-		List<Question> allQuestionList = new ArrayList<>();
+		List<Question> allQuestionList = questionService.getList();
         return success(allQuestionList);
 	}
 	
+	@RequestMapping(value = "/query/param", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse queryQuestionsByParam(Question question, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		List<Question> questionList = questionService.queryQuestionsByParam(question);
+        return success(questionList);
+	}
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String register(Question question, Model model, HttpServletRequest request,
+	@ResponseBody
+	public BaseResponse insert(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		Question questionTemp = new Question();
-		questionService.insert(questionTemp);
-		
-		return "redirect:login";
+		questionService.insert(question);		
+		return success(question);
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse update(Question question, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		questionService.update(question);		
+		return success(question);
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse delete(Question question, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		questionService.delete(question);		
+		return success(question);
 	}
 	
 	@RequestMapping(value = "/ask", method = RequestMethod.GET)

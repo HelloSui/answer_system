@@ -8,4 +8,5 @@ import com.suixue.question.domain.Question;
 public interface QuestionDao extends BaseDao<Question> {
 
 	List<Question> getList();
+	List<Question> queryQuestionsByParam(Question question);
 }

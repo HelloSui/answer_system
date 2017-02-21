@@ -20,5 +20,9 @@ public class QuestionService extends BaseService<Question, BaseDao<Question>> {
 		return questionDao.getList();
 	}
 	
+	public List<Question> queryQuestionsByParam(Question question){
+		return questionDao.queryQuestionsByParam(question);
+	}
+	
 }
 

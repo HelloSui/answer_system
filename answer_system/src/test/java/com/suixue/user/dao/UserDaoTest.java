@@ -24,6 +24,6 @@ public class UserDaoTest {
 		user.setName("zhangsan");
 		user.setPassword("123489");
 		
-		userDao.insertUser(user);
+		userDao.insert(user);
 	}
 }

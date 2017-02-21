@@ -4,7 +4,7 @@ import com.suixue.common.DataEntity;
 
 public class Role extends DataEntity {
 	
-	private String desc;
+	private String description;
 	
 	public String getId() {
 		return id;
@@ -14,16 +14,18 @@ public class Role extends DataEntity {
 		this.id = id;
 	}
 
-	public String getDesc() {
-		return desc;
+	
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", desc=" + desc + "]";
+		return "Role [id=" + id + ", description=" + description + "]";
 	}
 	
 }

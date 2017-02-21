@@ -6,7 +6,7 @@
 	<select id="getList" resultType="com.suixue.question.domain.Question">
 		SELECT 
 			q.id,
-			q.desc,
+			q.description,
 			q.title,
 			q.type_id as "typeId",
 			q.create_user_id as "createUserId"
@@ -15,28 +15,56 @@
 		where 1 = 1
 	</select>
 	
+	<select id="queryQuestionsByParam" resultType="com.suixue.question.domain.Question">
+        select  
+        	q.id,
+			q.description,
+			q.title,
+			q.type_id as "typeId",
+			q.create_user_id as "createUserId", 
+			q.create_time as createTime, 
+			q.update_time as updateTime
+        from `question` q 
+        where 1=1
+        <if test="id != null and id != ''">
+            and q.id = #{id}
+        </if>
+        <if test="description != null and description != ''">
+            and q.description LIKE CONCAT(CONCAT('%', #{description}), '%')
+        </if>
+        <if test="title != null and title != ''">
+            and q.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+        </if>
+        <if test="typeId != null and typeId != ''">
+            and q.type_id = #{typeId}
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+            and q.create_user_id = #{createUserId}
+        </if>
+        order by q.create_time desc
+    </select>
+	
 	<insert id="insert" parameterType="com.suixue.question.domain.Question">
 		INSERT INTO `question`(
 			`id`,
-			`desc`,
+			`description`,
 			`title`,
 			`type_id`,
-			`create_user_id`,
-			`title`
+			`create_user_id`
 		)
 		VALUES
 		(
 			#{id},
-			#{desc},
+			#{description},
 			#{title},
-			#{type_id},
-			#{create_user_id}
+			#{typeId},
+			#{createUserId}
 		)
 	</insert>
 	
 	<update id="update">
 		update question set
-		desc = #{desc},
+		description = #{description},
 		title = #{title},
 		type_id=#{typeId},
 		create_user_id = #{createUserId}

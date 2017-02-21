@@ -5,11 +5,11 @@ public enum QuestionType {
 
     private String typeId;
 
-    private String desc;
+    private String description;
     
-    private QuestionType(String typeId,String desc){
+    private QuestionType(String typeId,String description){
         this.typeId = typeId;
-        this.desc = desc;
+        this.description = description;
     }
 
 	public String getTypeId() {
@@ -20,12 +20,12 @@ public enum QuestionType {
 		this.typeId = typeId;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+	public void setDescription(String description) {
+		this.description = description;
+	}	
     
 }

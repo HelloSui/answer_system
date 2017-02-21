@@ -3,7 +3,7 @@ package com.suixue.question.domain;
 import com.suixue.common.DataEntity;
 
 public class Question extends DataEntity{
-	private String desc;
+	private String description;
 	private String title;
 	private String typeId;
 	private String createUserId;
@@ -13,11 +13,12 @@ public class Question extends DataEntity{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDesc() {
-		return desc;
+	
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getTitle() {
 		return title;
@@ -25,6 +26,8 @@ public class Question extends DataEntity{
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	
 	public String getTypeId() {
 		return typeId;
 	}
@@ -39,7 +42,7 @@ public class Question extends DataEntity{
 	}
 	@Override
 	public String toString() {
-		return "Question [id=" + id + ", desc=" + desc + ", title=" + title + ", typeId=" + typeId + ", createUserId=" + createUserId + "]";
+		return "Question [id=" + id + ", description=" + description + ", title=" + title + ", typeId=" + typeId + ", createUserId=" + createUserId + "]";
 	}
 	
 }
