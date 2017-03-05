@@ -53,5 +53,8 @@ CREATE TABLE `discuss` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '该回复的创建时间',
   `content` varchar(256) NOT NULL COMMENT '该回复的内容',
+  `agree_times` int(11) NOT NULL DEFAULT '0' COMMENT '被点赞的次数',
+  `oppose_times` int(11) NOT NULL DEFAULT '0' COMMENT '被反对的次数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
+
