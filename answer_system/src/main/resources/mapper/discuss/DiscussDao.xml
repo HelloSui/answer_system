@@ -32,13 +32,13 @@
         <if test="content != null and content != ''">
             and d.content LIKE CONCAT(CONCAT('%', #{content}), '%')
         </if>
-        <if test="question_id != null and question_id != ''">
+        <if test="questionId != null and questionId != ''">
             and d.question_id = #{questionId}
         </if>
-        <if test="speaker_id != null and speaker_id != ''">
+        <if test="speakerId != null and speakerId != ''">
             and d.speaker_id = #{speakerId}
         </if>
-        <if test="listner_id != null and listner_id != ''">
+        <if test="listnerId != null and listnerId != ''">
             and d.listner_id = #{listnerId}
         </if>
         order by d.create_time desc
@@ -75,5 +75,10 @@
 	<delete id="delete">
 		delete from discuss
 		where id=#{id}
+	</delete>
+	
+	<delete id="deleteByQuestionId">
+		delete from discuss
+		where question_id = #{questionId}
 	</delete>
 </mapper>

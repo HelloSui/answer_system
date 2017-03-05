@@ -24,5 +24,9 @@ public class DiscussService extends BaseService<Discuss, BaseDao<Discuss>> {
 		return discussDao.queryDiscussesByParam(discuss);
 	}
 	
+	public void deleteByQuestionId(String questionId){
+		discussDao.deleteByQuestionId(questionId);
+	}
+	
 }
 

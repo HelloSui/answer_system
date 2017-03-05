@@ -36,7 +36,7 @@ public class DiscussServiceTest {
 	@Test
 	public void testSelectByParam() {	
 		Discuss discuss = new Discuss();
-		discuss.setId("1");
+		discuss.setId("3");
 //		discuss.setQuestionId("3");
 //		discuss.setListnerId("2");
 //		discuss.setSpeakerId("3");
@@ -74,7 +74,13 @@ public class DiscussServiceTest {
 	@Test
 	public void testDelect() {
 		Discuss discuss = new Discuss();
-		discuss.setId("5");
+		//discuss.setId("5");
+		discuss.setQuestionId("2");
 		discussDao.delete(discuss);
+	}
+	
+	@Test
+	public void testDelectByParam() {
+		discussDao.deleteByQuestionId("2");
 	}
 }

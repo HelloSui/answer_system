@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
+import com.suixue.discuss.service.DiscussService;
 import com.suixue.question.domain.Question;
 import com.suixue.question.service.QuestionService;
 
@@ -23,7 +24,14 @@ public class QuestionController extends BaseController  {
 	
 	@Autowired
 	private QuestionService questionService;
+	@Autowired
+	private DiscussService discussService;
 	
+	/**
+	 * 查询所有的问题列表
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/query/all", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse queryAllQuestion() throws Exception{
@@ -31,6 +39,15 @@ public class QuestionController extends BaseController  {
         return success(allQuestionList);
 	}
 	
+	/**
+	 * 根据参数查询问题列表
+	 * @param question
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/query/param", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse queryQuestionsByParam(Question question, Model model, HttpServletRequest request,
@@ -39,6 +56,14 @@ public class QuestionController extends BaseController  {
         return success(questionList);
 	}
 	
+	/**
+	 * 插入一条新问题
+	 * @param question
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse insert(Question question, Model model, HttpServletRequest request,
@@ -47,6 +72,14 @@ public class QuestionController extends BaseController  {
 		return success(question);
 	}
 	
+	/**
+	 * 更新一个问题记录
+	 * @param question
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse update(Question question, Model model, HttpServletRequest request,
@@ -55,11 +88,20 @@ public class QuestionController extends BaseController  {
 		return success(question);
 	}
 	
+	/**
+	 * 删除一个问题记录，同时删除该问题的所有讨论列表
+	 * @param question
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse delete(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		questionService.delete(question);		
+		questionService.delete(question);
+		discussService.deleteByQuestionId(question.getId());
 		return success(question);
 	}
 	
