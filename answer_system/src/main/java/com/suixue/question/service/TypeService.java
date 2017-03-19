@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.suixue.common.BaseDao;
 import com.suixue.common.BaseService;
-import com.suixue.question.dao.QuestionDao;
 import com.suixue.question.dao.TypeDao;
-import com.suixue.question.domain.Question;
 import com.suixue.question.domain.Type;
 
 
@@ -22,5 +20,13 @@ public class TypeService extends BaseService<Type, BaseDao<Type>> {
 		return typeDao.getList();
 	}
 	
+	public List<Type> queryQuestionTypeIdsByParam(String typeIds){
+		 List<Long> typeIdsList = null;
+		 String[] arry =typeIds.split(",");
+         for (String ids:arry) {
+        	 typeIdsList.add(Long.valueOf(ids));
+         }
+		return typeDao.queryQuestionTypesByParam(typeIdsList);
+	}
 }
 

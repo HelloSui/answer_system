@@ -16,9 +16,7 @@ import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
 import com.suixue.discuss.service.DiscussService;
 import com.suixue.question.domain.Question;
-import com.suixue.question.domain.Type;
 import com.suixue.question.service.QuestionService;
-import com.suixue.question.service.TypeService;
 
 @Controller
 @RequestMapping("/question")
@@ -28,8 +26,6 @@ public class QuestionController extends BaseController  {
 	private QuestionService questionService;
 	@Autowired
 	private DiscussService discussService;
-	@Autowired
-	private TypeService typeService;
 	
 	/**
 	 * 查询所有的问题列表
@@ -114,17 +110,5 @@ public class QuestionController extends BaseController  {
 			HttpServletResponse response) {
 		
 		return "ask";
-	}
-	
-	/**
-	 * 查询所有的问题类型列表
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/query/all/type", method = RequestMethod.GET)
-	@ResponseBody
-	public BaseResponse queryAllQuestionType() throws Exception{
-		List<Type> allQuestionTypeList = typeService.getList();
-        return success(allQuestionTypeList);
 	}
 }

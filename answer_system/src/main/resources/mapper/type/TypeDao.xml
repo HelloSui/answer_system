@@ -12,6 +12,19 @@
 		where 1 = 1
 	</select>
 	
+	 <select id="queryQuestionTypesByParam" resultType="com.suixue.question.domain.Type">
+       SELECT 
+			id,
+			description
+		FROM
+			type
+        where id in
+        <foreach item="item" index="index" collection="typeIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+	
+	
 	<insert id="insert" parameterType="com.suixue.question.domain.Type">
 		INSERT INTO `question`(
 			`id`,
