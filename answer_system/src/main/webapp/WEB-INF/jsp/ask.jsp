@@ -65,7 +65,8 @@ form p {
 	margin: 5px;
 	text-decoration: none !important;
 	width: 100px;
-	height: 40px; border-width : 0;
+	height: 40px;
+	border-width: 0;
 	background-color: #fff;
 	border-width: 0;
 }
@@ -95,8 +96,29 @@ form p {
 		});
 
 		$('#ques-sub-btn').click(function() {
-
+			
+			var title = $('#title').val();
+			var description = $('#description').val();
+			var typeId = getSelectLabelId();
+			var postData = {'typeId':typeId, 'title': title, 'description': description};
+			$.post("${ctx}/question/insert",postData,function(result){
+				if(result.retCode == 0) {
+			    	alert('提问成功');
+				}
+				else {
+					alert('提交失败');
+				}
+			});
 		});
+		
+		function getSelectLabelId(){
+			var labelIds = '';
+			labelIds = $('.question-tags.save').map(function(){
+				return $(this).attr('id');
+			}).get().join(',');
+			alert(labelIds);
+			return labelIds;
+		}
 	});
 </script>
 </head>
@@ -109,7 +131,7 @@ form p {
 				<h1>提问</h1>
 				<div class="control-group warning">
 					<div class="controls">
-						<input type="text" class="ask-input form-control"
+						<input id="title" type="text" class="ask-input form-control"
 							placeholder="请一句话说明问题，以问号结尾" /> <span class="help-block"><font
 							color="red">A longer block of help text that breaks onto a
 								new line and may extend beyond one line.</font></span>
@@ -117,27 +139,18 @@ form p {
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<textarea type="text" class="form-control" cols="20" rows="10"
-							placeholder="问题补充(选填)"></textarea>
+						<textarea id="description" type="text" class="form-control"
+							cols="20" rows="10" placeholder="问题补充(选填)"></textarea>
 					</div>
 				</div>
 
 				<p>请选择问题分类</p>
 				<div class="control-group">
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-					<a href="javascript:void(0)" name="android" class="question-tags">android</a>
-
-
+					<a href="javascript:void(0)" name="android" class="question-tags"
+						id="1">android</a> <a href="javascript:void(0)" name="android"
+						class="question-tags" id="2">android</a> <a
+						href="javascript:void(0)" name="android" class="question-tags"
+						id="3">android</a>
 				</div>
 
 				<div class="right">
@@ -155,6 +168,9 @@ form p {
 			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
 		</div>
 	</div>
+
+	<input type="hidden" id="currentUserId" value="${currentUser.id}" />
+	<input type="hidden" id="currentUserName" value="${currentUser.name}" />
 	<!-- 包含尾部 -->
 	<jsp:include page="footer.jsp" />
 </body>

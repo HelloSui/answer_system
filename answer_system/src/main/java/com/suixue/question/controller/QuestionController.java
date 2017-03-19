@@ -19,6 +19,7 @@ import com.suixue.question.domain.Question;
 import com.suixue.question.domain.Type;
 import com.suixue.question.service.QuestionService;
 import com.suixue.question.service.TypeService;
+import com.suixue.user.domain.User;
 
 @Controller
 @RequestMapping("/question")
@@ -68,7 +69,7 @@ public class QuestionController extends BaseController  {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResponse insert(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -112,6 +113,14 @@ public class QuestionController extends BaseController  {
 	@RequestMapping(value = "/ask", method = RequestMethod.GET)
 	public String askQuestion(Model model, HttpServletRequest request,
 			HttpServletResponse response) {
+		
+		User currentUser = (User) request.getSession().getAttribute("currentUser");
+		if(currentUser == null) {
+			currentUser = new User();
+			currentUser.setId("123");
+			currentUser.setName("suixue");
+		}
+		model.addAttribute("currentUser",currentUser);
 		
 		return "ask";
 	}
