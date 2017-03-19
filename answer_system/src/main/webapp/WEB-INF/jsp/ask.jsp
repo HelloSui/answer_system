@@ -146,11 +146,10 @@ form p {
 
 				<p>请选择问题分类</p>
 				<div class="control-group">
-					<a href="javascript:void(0)" name="android" class="question-tags"
-						id="1">android</a> <a href="javascript:void(0)" name="android"
-						class="question-tags" id="2">android</a> <a
-						href="javascript:void(0)" name="android" class="question-tags"
-						id="3">android</a>
+					<c:forEach items="${allQuestionType}" var="item">
+						<a href="javascript:void(0)" id="${item.id}" class="question-tags"
+							id="1">${item.description }</a>
+					</c:forEach>
 				</div>
 
 				<div class="right">

@@ -122,6 +122,10 @@ public class QuestionController extends BaseController  {
 		}
 		model.addAttribute("currentUser",currentUser);
 		
+		//将问题标签写入到jsp
+		List<Type> allQuestionTypeList = typeService.getList();
+		model.addAttribute("allQuestionType",allQuestionTypeList);
+		
 		return "ask";
 	}
 	
