@@ -1,7 +1,7 @@
 package com.suixue.common;
 
 public enum RoleType {
-	ROLE_ADMIN("1","系统管理员"),ROLE_TEACHER("2","教师"),ROLE_STUDENT("3","学生"),ROLE_VISIT("4","游客");
+	ROLE_TEACHER("1","教师"),ROLE_STUDENT("2","学生"),ROLE_VISIT("3","游客");
 
     private String roleId;
 

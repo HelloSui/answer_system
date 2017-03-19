@@ -10,7 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.suixue.question.dao.QuestionDao;
+import com.suixue.question.dao.TypeDao;
 import com.suixue.question.domain.Question;
+import com.suixue.question.domain.Type;
 import com.suixue.user.domain.User;
 
 //自动加载spring对应的容器
@@ -20,6 +22,8 @@ public class QuestionServiceTest {
 	
 	@Resource
 	private QuestionDao questionDao;
+	@Resource
+	private TypeDao typeDao;
 	
 	@Test
 	public void testSelect() {
@@ -72,5 +76,14 @@ public class QuestionServiceTest {
 		Question question = new Question();
 		question.setId("3");
 		questionDao.delete(question);
+	}
+	
+	@Test
+	public void testSelectTypeIds() {
+		List<Type> result = typeDao.getList();
+		for(Type e:result){
+			System.out.println(e.toString());
+		}
+		//userDao.insertUser(user);
 	}
 }

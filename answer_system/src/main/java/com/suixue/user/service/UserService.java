@@ -10,7 +10,6 @@ import com.suixue.user.domain.User;
 
 @Service
 public class UserService extends BaseService<User, BaseDao<User>>{
-	
 	@Override
 	public void insert(User entity) {
 		encodePassword(entity);

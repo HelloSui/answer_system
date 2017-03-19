@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suixue.question.dao.TypeDao">
+
+	<select id="getList" resultType="com.suixue.question.domain.Type">
+		SELECT 
+			id,
+			description
+		FROM
+			type
+		where 1 = 1
+	</select>
+	
+	<insert id="insert" parameterType="com.suixue.question.domain.Type">
+		INSERT INTO `question`(
+			`id`,
+			`description`
+		)
+		VALUES
+		(
+			#{id},
+			#{description}
+		)
+	</insert>
+	
+	<update id="update">
+		update type set
+		description = #{description}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from type
+		where id=#{id}
+	</delete>
+</mapper>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.suixue.common.BaseController;
 import com.suixue.user.domain.User;
+import com.suixue.user.domain.UserRole;
+import com.suixue.user.service.UserRoleService;
 import com.suixue.user.service.UserService;
 
 @Controller
@@ -20,6 +22,8 @@ public class LoginController extends BaseController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String getLogin() {
@@ -48,7 +52,7 @@ public class LoginController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(User user, Model model, HttpServletRequest request,
+	public String register(User user,String roleId, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		
 		User userTmp = new User();
@@ -61,6 +65,10 @@ public class LoginController extends BaseController {
 		}
 		
 		userService.insert(user);
+		UserRole param = new UserRole();
+		param.setRoleId(roleId);
+		param.setUserId(user.getId());
+		userRoleService.insert(param);
 		
 		return "redirect:login";
 	}
