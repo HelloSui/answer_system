@@ -21,12 +21,6 @@ public class TypeService extends BaseService<Type, BaseDao<Type>> {
 	}
 	
 	public List<Type> queryQuestionTypeIdsByParam(String typeIds){
-		 List<Long> typeIdsList = null;
-		 String[] arry =typeIds.split(",");
-         for (String ids:arry) {
-        	 typeIdsList.add(Long.valueOf(ids));
-         }
-		return typeDao.queryQuestionTypesByParam(typeIdsList);
+		return typeDao.queryQuestionTypesByParam(typeIds);
 	}
 }
-

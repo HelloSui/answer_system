@@ -27,12 +27,7 @@ public class TypeServiceTest {
 	@Test
 	public void testSelectByParam() {	
 		String typeIds = "1,3,5";
-		List<Long> typeIdsList = new ArrayList();
-		 String[] arry =typeIds.split(",");
-         for (String ids:arry) {
-        	 typeIdsList.add(Long.valueOf(ids));
-         }
-		List<Type> result = typeDao.queryQuestionTypesByParam(typeIdsList);
+		List<Type> result = typeDao.queryQuestionTypesByParam(typeIds);
 		for(Type e:result){
 			System.out.println(e.toString());
 		}

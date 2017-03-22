@@ -86,7 +86,7 @@
 			</div>
 
 			<div class="ans-user">
-				<span>由 <span><b>邓昌建</b><span> 回答 </span>
+				<span>由 <span><b>卢燕宁 老师</b><span> 回答 </span>
 			</div>
 			<!-- 回答的内容 -->
 			<div class="ans-content">
@@ -96,7 +96,7 @@
 
 			<!-- 控制 -->
 			<div class="ctrl-bar">
-				<span class="agree-with"><b>赞同</b><em>2</em></span> <span
+				<span class="agree-with"><b>赞同</b><em>10</em></span> <span
 					class="oppose"><b>反对</b><em>3</em></span>
 			</div>
 
@@ -118,7 +118,7 @@
 			</div>
 
 			<div class="ans-user">
-				<span>由 <span><b>邓昌建</b><span> 回答 </span>
+				<span>由 <span><b>卢燕宁 老师</b><span> 回答 </span>
 			</div>
 			<!-- 回答的内容 -->
 			<div class="ans-content">

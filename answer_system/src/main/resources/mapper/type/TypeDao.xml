@@ -12,16 +12,16 @@
 		where 1 = 1
 	</select>
 	
-	 <select id="queryQuestionTypesByParam" resultType="com.suixue.question.domain.Type">
+	 <select id="queryQuestionTypesByParam" resultType="com.suixue.question.domain.Type" parameterType="java.lang.String">
        SELECT 
 			id,
 			description
 		FROM
 			type
-        where id in
-        <foreach item="item" index="index" collection="typeIds" open="(" separator="," close=")">
-            #{item}
-        </foreach>
+        where 1=1
+        <if test="typeIds!=null">
+        and find_in_set(id, #{typeIds})
+        </if>
     </select>
 	
 	
