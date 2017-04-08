@@ -117,5 +117,17 @@ public class DiscussController extends BaseController  {
 		return success("删除成功");
 	}
 	
+	@RequestMapping(value="/discussList",method=RequestMethod.GET)
+	public String getAnswerList() {
+		return "discussList";
+	}
+	
+	@RequestMapping(value="/discussList",method=RequestMethod.POST)
+	@ResponseBody
+	public String getAnswerListData() {
+		
+		
+		return "discussList";
+	}
 	
 }
