@@ -11,10 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.suixue.discuss.dao.DiscussDao;
 import com.suixue.discuss.domain.Discuss;
-import com.suixue.discuss.service.DiscussService;
-import com.suixue.question.dao.QuestionDao;
-import com.suixue.question.domain.Question;
-import com.suixue.user.domain.User;
 
 //自动加载spring对应的容器
 @ContextConfiguration({"classpath:spring-mybatis.xml"})
@@ -82,5 +78,16 @@ public class DiscussServiceTest {
 	@Test
 	public void testDelectByParam() {
 		discussDao.deleteByQuestionId("2");
+	}
+	@Test
+	public void querybestDiscusssByParam() {
+		Discuss discuss = new Discuss();
+		discuss.setQuestionId("3");
+		discuss.setListnerId("4");
+		Discuss result = discussDao.querybestDiscusssByParam(discuss);
+		if(result == null){
+			System.out.println("null");
+		}
+		System.out.println(result.toString());
 	}
 }

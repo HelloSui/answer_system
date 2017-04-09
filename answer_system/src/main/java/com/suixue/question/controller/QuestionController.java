@@ -1,36 +1,24 @@
 package com.suixue.question.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
-import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
-import com.suixue.common.BaseResponse;
+import com.suixue.discuss.domain.Discuss;
 import com.suixue.discuss.service.DiscussService;
-import com.suixue.discuss.service.DiscussService;
-import com.suixue.question.domain.Question;
 import com.suixue.question.domain.Question;
 import com.suixue.question.domain.Type;
-import com.suixue.question.service.QuestionService;
 import com.suixue.question.service.QuestionService;
 import com.suixue.question.service.TypeService;
 import com.suixue.user.domain.User;
@@ -143,10 +131,32 @@ public class QuestionController extends BaseController  {
 		return "ask";
 	}
 	
-//	@RequestMapping(value = "/getQuestionListData", method = RequestMethod.GET)
-//	@ResponseBody
-//	public BaseResponse getQuestionList() {
-//		
-//	}
+	/**
+	 * 查询附带最佳回答的问题列表
+	 * @param question
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getQuestionListData", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse getQuestionList(Question question, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		List<Question> questionList = new ArrayList<>();
+		if(question == null){
+			questionList = questionService.getList();
+		}else{
+			questionList = questionService.queryQuestionsByParam(question);
+		}
+		for(Question q : questionList){
+			Discuss discuss = new Discuss();
+			discuss.setListnerId(q.getCreateUserId());
+			discuss.setQuestionId(q.getId());
+			q.setBestDiscuss(discussService.querybestDiscusssByParam(discuss));
+		}
+        return success(questionList);
+	}
 }
 
