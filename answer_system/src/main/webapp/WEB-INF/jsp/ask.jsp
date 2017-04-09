@@ -100,10 +100,11 @@ form p {
 			var title = $('#title').val();
 			var description = $('#description').val();
 			var typeId = getSelectLabelId();
-			var postData = {'typeId':typeId, 'title': title, 'description': description};
+			var postData = {'typeId':typeId, 'title': title, 'description': description, 'createUserId': '${currentUser.id}'};
 			$.post("${ctx}/question/insert",postData,function(result){
 				if(result.retCode == 0) {
 			    	alert('提问成功');
+			    	document.location.href="${ctx}/discuss/discussList";
 				}
 				else {
 					alert('提交失败');

@@ -20,5 +20,5 @@ public interface QuestionDao extends BaseDao<Question> {
 	 * @param question
 	 * @return
 	 */
-	List<Question> queryQuestionsByParam(@Param("question")Question question);
+	List<Question> queryQuestionsByParam(Question question);
 }

@@ -37,11 +37,11 @@ public class QuestionServiceTest {
 	@Test
 	public void testSelectByParam() {	
 		Question question = new Question();
-		//question.setId("3");
-		question.setDescription("da");
+		question.setId("2");
+		//question.setDescription("da");
 		//question.setTitle("suixueefa");
 		//question.setCreateUserId("3");
-		question.setTypeId("3");
+		//question.setTypeId("3");
 		List<Question> result = questionDao.queryQuestionsByParam(question);
 		for(Question e:result){
 			System.out.println(e.toString());
@@ -52,7 +52,7 @@ public class QuestionServiceTest {
 	@Test
 	public void testInsert() {
 		Question question = new Question();
-		question.setId("5");
+		//question.setId("6");
 		question.setDescription("test34");
 		question.setTitle("suixueefa");
 		question.setCreateUserId("3");

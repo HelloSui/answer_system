@@ -142,5 +142,11 @@ public class QuestionController extends BaseController  {
 		
 		return "ask";
 	}
+	
+//	@RequestMapping(value = "/getQuestionListData", method = RequestMethod.GET)
+//	@ResponseBody
+//	public BaseResponse getQuestionList() {
+//		
+//	}
 }
 

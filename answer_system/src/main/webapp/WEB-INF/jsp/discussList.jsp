@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <%@ include file="base.jsp"%>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -176,5 +177,5 @@
 	</div>
 </body>
 
-
+<%@ include file="footer.jsp"%>
 </html>
