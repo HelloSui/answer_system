@@ -12,4 +12,11 @@ public interface DiscussDao extends BaseDao<Discuss> {
 	List<Discuss> getList();
 	List<Discuss> queryDiscussesByParam(Discuss discuss);
 	public void deleteByQuestionId(@Param("questionId") String questionId);
+	
+	/**
+	 * 查询某个人提出的某个问题的最佳回答
+	 * @param discuss
+	 * @return
+	 */
+	Discuss querybestDiscusssByParam(Discuss discuss);
 }

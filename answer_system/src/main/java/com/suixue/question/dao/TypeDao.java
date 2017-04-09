@@ -1,13 +1,10 @@
 package com.suixue.question.dao;
 
 import java.util.List;
-import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.suixue.common.BaseDao;
-import com.suixue.common.BaseDao;
-import com.suixue.question.domain.Type;
 import com.suixue.question.domain.Type;
 
 public interface TypeDao extends BaseDao<Type> {

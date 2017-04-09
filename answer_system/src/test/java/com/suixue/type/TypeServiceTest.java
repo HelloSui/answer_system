@@ -1,6 +1,5 @@
 package com.suixue.type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,11 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.suixue.question.dao.QuestionDao;
 import com.suixue.question.dao.TypeDao;
-import com.suixue.question.domain.Question;
 import com.suixue.question.domain.Type;
-import com.suixue.user.domain.User;
 
 //自动加载spring对应的容器
 @ContextConfiguration({"classpath:spring-mybatis.xml"})

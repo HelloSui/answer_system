@@ -1,7 +1,6 @@
 package com.suixue.discuss.domain;
 
 import com.suixue.common.DataEntity;
-import com.suixue.question.domain.Question;
 
 public class Discuss extends DataEntity{
 	private String questionId;

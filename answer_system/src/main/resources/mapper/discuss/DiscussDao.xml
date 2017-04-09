@@ -9,10 +9,15 @@
 			d.question_id as "questionId",
 			d.speaker_id as "speakerId",
 			d.listner_id as "listnerId",
-			d.content as "content"
+			d.content as "content",
+			d.create_time as createTime, 
+			d.update_time as updateTime,
+			d.agree_times as "agreeTimes",
+			d.oppose_times as "opposeTimes"
 		FROM
 			`discuss` d 
 		where 1 = 1
+		order by d.create_time desc
 	</select>
 	
 	<select id="queryDiscussesByParam" resultType="com.suixue.discuss.domain.Discuss">
@@ -23,7 +28,9 @@
 			d.listner_id as "listnerId",
 			d.content as "content", 
 			d.create_time as createTime, 
-			d.update_time as updateTime
+			d.update_time as updateTime,
+			d.agree_times as "agreeTimes",
+			d.oppose_times as "opposeTimes"
         from `discuss` d 
         where 1=1
         <if test="id != null and id != ''">
@@ -40,6 +47,12 @@
         </if>
         <if test="listnerId != null and listnerId != ''">
             and d.listner_id = #{listnerId}
+        </if>
+        <if test="agreeTimes != null and agreeTimes != ''">
+            and d.agree_times = #{agreeTimes}
+        </if>
+        <if test="opposeTimes != null and opposeTimes != ''">
+            and d.oppose_times = #{opposeTimes}
         </if>
         order by d.create_time desc
     </select>
@@ -68,7 +81,9 @@
 		speaker_id = #{speakerId},
 		listner_id=#{listnerId},
 		content = #{content},
-		update_time = #{updateTime}
+		update_time = #{updateTime},
+		agree_times = #{agreeTimes},
+		oppose_times = #{opposeTimes}
 		where id=#{id}
 	</update>
 	
@@ -81,4 +96,21 @@
 		delete from discuss
 		where question_id = #{questionId}
 	</delete>
+	
+	<select id="querybestDiscusssByParam" resultType="com.suixue.discuss.domain.Discuss">
+		SELECT 
+			d.id,
+			d.question_id as "questionId",
+			d.speaker_id as "speakerId",
+			d.listner_id as "listnerId",
+			d.content as "content",
+			d.create_time as createTime, 
+			d.update_time as updateTime,
+			d.agree_times as "agreeTimes",
+			d.oppose_times as "opposeTimes"
+		FROM
+			`discuss` d 
+		where d.listner_id = #{listnerId} and d.question_id = #{questionId}
+	 	order by agree_times desc limit 1
+	</select>
 </mapper>

@@ -2,8 +2,6 @@ package com.suixue.question.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.suixue.common.BaseDao;
 import com.suixue.question.domain.Question;
 
@@ -21,4 +19,11 @@ public interface QuestionDao extends BaseDao<Question> {
 	 * @return
 	 */
 	List<Question> queryQuestionsByParam(Question question);
+	
+	/**
+	 * 查询附带最好的回答的问题列表
+	 * @param question
+	 * @return
+	 */
+	List<Question> getQuestionList(Question question);
 }
