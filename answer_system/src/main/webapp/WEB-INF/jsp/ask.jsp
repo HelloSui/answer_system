@@ -1,19 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp"%>
 <%@ include file="base.jsp"%>
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 
 <style type="text/css">
+
+html {
+	/*padding-right:calc(100vw - 100%);*/
+}
+
 .ask-input {
 	height: 40px;
 	line-height: 50px;
 }
 
+.container.main{
+	padding-top:80px;
+}
 .container-left {
 	width: 70%;
 	float: left;
@@ -96,25 +104,29 @@ form p {
 		});
 
 		$('#ques-sub-btn').click(function() {
-			
+
 			var title = $('#title').val();
 			var description = $('#description').val();
 			var typeId = getSelectLabelId();
-			var postData = {'typeId':typeId, 'title': title, 'description': description, 'createUserId': '${currentUser.id}'};
-			$.post("${ctx}/question/insert",postData,function(result){
-				if(result.retCode == 0) {
-			    	alert('提问成功');
-			    	document.location.href="${ctx}/discuss/discussList";
-				}
-				else {
+			var postData = {
+				'typeId' : typeId,
+				'title' : title,
+				'description' : description,
+				'createUserId' : '${currentUser.id}'
+			};
+			$.post("${ctx}/question/insert", postData, function(result) {
+				if (result.retCode == 0) {
+					alert('提问成功');
+					document.location.href = "${ctx}/discuss/discussList";
+				} else {
 					alert('提交失败');
 				}
 			});
 		});
-		
-		function getSelectLabelId(){
+
+		function getSelectLabelId() {
 			var labelIds = '';
-			labelIds = $('.question-tags.save').map(function(){
+			labelIds = $('.question-tags.save').map(function() {
 				return $(this).attr('id');
 			}).get().join(',');
 			alert(labelIds);
@@ -124,9 +136,8 @@ form p {
 </script>
 </head>
 <body>
-	<!-- 包含头部 -->
-	<jsp:include page="header.jsp" />
-	<div class="container">
+	<div class="container main">
+		
 		<div class="container-left">
 			<form class="form-horizontal">
 				<h1>提问</h1>
@@ -157,8 +168,8 @@ form p {
 					<a id="ques-sub-btn" class="btn btn-red">提交</a>
 				</div>
 			</form>
-
 		</div>
+
 
 		<div class="container-right">
 			<h4 class="ask-question">提问注意</h4>
@@ -167,11 +178,11 @@ form p {
 			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
 			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
 		</div>
-	</div>
 
-	<input type="hidden" id="currentUserId" value="${currentUser.id}" />
-	<input type="hidden" id="currentUserName" value="${currentUser.name}" />
-	<!-- 包含尾部 -->
-	<jsp:include page="footer.jsp" />
+		<input type="hidden" id="currentUserId" value="${currentUser.id}" />
+		<input type="hidden" id="currentUserName" value="${currentUser.name}" />
+		
+	</div>
 </body>
+<%@ include file="footer.jsp"%>
 </html>

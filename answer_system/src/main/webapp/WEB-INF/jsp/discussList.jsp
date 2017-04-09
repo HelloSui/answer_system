@@ -6,8 +6,15 @@
 <html lang="en-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>论坛答疑系统</title>
 <style>
+
+html {
+	/*padding-right:calc(100vw - 100%);*/
+}
+.container.main{
+	padding-top:60px;
+}
 .ques-list-item {
 	background-color: #fff;
 	overflow: auto; /*margin重叠*/
@@ -69,7 +76,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container main">
 
 		<div class="ques-list-item">
 

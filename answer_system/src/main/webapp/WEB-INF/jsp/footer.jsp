@@ -24,7 +24,7 @@
 <body>
 	<div class="footer navbar-inverse">
 		<div class="copyright">
-			<span>Copyright &copy; <a href="#">论坛答疑系统</a></span> | <span><a
+			<span>Copyright &copy; <a href="#">课后辅导讨论系统</a></span> | <span><a
 				href="#" target="_blank">隋雪</a></span> | <span><a href="#"
 				target="_blank">suixuer@163.com</a></span>
 		</div>

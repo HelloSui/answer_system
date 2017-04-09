@@ -1,36 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div>
-	<nav class="navbar navbar-inverse" role="navigation">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">答疑论坛</a>
-			</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">我要提问</a></li>
-					<li><a href="#">我要解答</a></li>
-					<li><a href="#">我要搜索</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Link</a></li>
-				</ul>
-			</div>
-			<!-- /.navbar-collapse -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button class="navbar-toggle collapsed" type="button"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand hidden-sm"
+				onclick="">课后辅导讨论系统</a>
 		</div>
-		<!-- /.container-fluid -->
-	</nav>
+		<div class="navbar-collapse collapse" role="navigation">
+			<ul class="nav navbar-nav">
+				<li><a href="${ctx}home/home" onclick="">首页</a></li>
+				<li><a href="${ctx}discuss/discussList" onclick="">我要回答</a></li>
+				<li><a href="${ctx}question/ask" onclick="">我要提问</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right hidden-sm">
+				<li><a href="http://mb.bootcss.com" onclick="" target="_blank">登录/注册</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
+
 
 <script type="text/javascript">
 	$(function() {
