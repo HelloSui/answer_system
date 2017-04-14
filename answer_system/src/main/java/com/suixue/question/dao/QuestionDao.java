@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.suixue.common.BaseDao;
 import com.suixue.question.domain.Question;
+import com.suixue.question.domain.QuestionParam;
 
 public interface QuestionDao extends BaseDao<Question> {
 
@@ -18,7 +19,7 @@ public interface QuestionDao extends BaseDao<Question> {
 	 * @param question
 	 * @return
 	 */
-	List<Question> queryQuestionsByParam(Question question);
+	List<Question> queryQuestionsByParam(QuestionParam question);
 	
 	/**
 	 * 查询附带最好的回答的问题列表

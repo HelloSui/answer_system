@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.suixue.question.dao.QuestionDao;
 import com.suixue.question.dao.TypeDao;
 import com.suixue.question.domain.Question;
+import com.suixue.question.domain.QuestionParam;
 import com.suixue.question.domain.Type;
 
 //自动加载spring对应的容器
@@ -35,7 +36,7 @@ public class QuestionServiceTest {
 	
 	@Test
 	public void testSelectByParam() {	
-		Question question = new Question();
+		QuestionParam question = new QuestionParam();
 		question.setId("2");
 		//question.setDescription("da");
 		//question.setTitle("suixueefa");

@@ -29,4 +29,12 @@
 			#{password}
 		)
 	</insert>
+	
+	<select id="getUserNameById" resultType="com.suixue.user.domain.User">
+		SELECT 
+			u.name 
+		FROM
+			`user` u 
+		where u.id=#{id}
+	</select>
 </mapper>

@@ -7,5 +7,5 @@ public interface UserDao extends BaseDao<User>{
 	
 	//判断数据是否正确
 	User validateUser(User param);
-	
+	User getUserNameById(String userId);
 }

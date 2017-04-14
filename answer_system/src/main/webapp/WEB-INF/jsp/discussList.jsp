@@ -8,13 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>论坛答疑系统</title>
 <style>
-
 html {
 	/*padding-right:calc(100vw - 100%);*/
+	
 }
-.container.main{
-	padding-top:60px;
+
+.container.main {
+	padding-top: 60px;
 }
+
 .ques-list-item {
 	background-color: #fff;
 	overflow: auto; /*margin重叠*/
@@ -75,94 +77,127 @@ html {
 }
 </style>
 </head>
+
+<script type="text/javascript">
+	$(function(){
+		$('.list-container').on('click','.agree-with',function(){
+			var agreeNum = $(this).children('em').html();
+			alert(agreeNum);
+		});
+		
+		$('.list-container').on('click','.oppose',function(){
+			var agreeNum = $(this).children('em').html();
+			alert(agreeNum);
+		});
+	});
+	
+	String.prototype.format = function() {
+		var i = 0, args = arguments;
+		var res = this;
+		for (i in args) {
+			var v = args[i++];
+			res = res.replace(/%s/, v);
+		}
+		return res;
+
+	};
+
+	$(function() {
+		getQuestionData(null, 1, 10);
+	});
+
+	function getQuestionData(queryParam, pageNo, pageSize) {
+
+		queryParam = queryParam || {};
+		pageNo = pageNo || 1;
+		pageSize = pageSize || 10;
+
+		queryParam.pageNo = pageNo;
+		queryParam.pageSize = pageSize;
+
+		$.get(
+						"${ctx}question/getQuestionListData",
+						queryParam,
+						function(result) {
+							if (result.retCode == 0) {
+								console.log(result);
+
+								var dataHtml = '';
+
+								var pageData = result.value.pageData;
+
+								for (index in pageData) {
+									var item = pageData[index];
+									var title = item.title;
+									var description = item.description;
+									var createUserName = item.createUserName;
+									var speakerName = item.speakerName;
+			
+
+									var bestDiscuss = item.bestDiscuss;
+
+									var labelTag = '';
+
+									var itemHtml = '';
+
+									var labelArr = item.typeId.split(',');
+
+									for (labelIndex in labelArr) {
+										var labelItemArr = labelArr[labelIndex]
+												.split(':');
+
+										var itemHtml = '<a href="javascript:void(0)" class="classfy-tag">%s</a>'
+												.format(labelItemArr[1]);
+										labelTag += itemHtml;
+									}
+
+									var fromTag = '<div class="from-tag">'
+											+ '<span>由 </span><b>%s</b><span> 提问 </span> <span>标签：'
+													.format(createUserName);
+									fromTag += labelTag + '</span></div>'
+
+									var titleTag = '<div><a href="" class="ques-title">%s</a></div>'
+											.format(title);
+
+									var answerUserTag = '';
+									var ansContentTag = '';
+									var ctrlBarTag = '<div class="ctrl-bar">';
+									if (bestDiscuss) {
+										answerUserTag = '<div class="ans-user"><span>由 </span><b>%s</b><span> 回答 </span></div>'.format(speakerName);
+										ansContentTag = '<div class="ans-content">%s</div>'
+												.format(bestDiscuss.content);
+										ctrlBarTag += '<span class="agree-with"><b>赞同</b><em>%s</em></span> '.format(bestDiscuss.agreeTimes);
+										ctrlBarTag += '<span class="oppose"><b>反对</b><em>%s</em></span> '.format(bestDiscuss.opposeTimes);
+									}
+									ctrlBarTag += '<span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</b></span></div>';
+
+									itemHtml = ''
+											+ '<div class="ques-list-item">'
+											+ fromTag + titleTag
+											+ answerUserTag + ansContentTag
+											+ ctrlBarTag + '</div>';
+
+									dataHtml += itemHtml;
+									itemHtml = '';
+
+									//break;
+								}
+
+								$('.list-container').append(dataHtml);
+
+							} else {
+								alert('请求失败');
+							}
+						});
+
+	}
+</script>
 <body>
 	<div class="container main">
 
-		<div class="ques-list-item">
-
-			<!-- 由谁提问 -->
-			<div class="from-tag">
-				<span>由 <span><b>隋雪</b><span> 提问 </span> <span>标签：
-							<a href="javascript:void(0)" class="classfy-tag">java</a> <a
-							href="javascript:void(0)" class="classfy-tag">python</a>
-					</span>
-			</div>
-
-			<!-- 提问的标题 -->
-			<div>
-				<a href="" class="ques-title">我不会学java怎么办！！</a>
-			</div>
-
-			<div class="ans-user">
-				<span>由 <span><b>卢燕宁 老师</b><span> 回答 </span>
-			</div>
-			<!-- 回答的内容 -->
-			<div class="ans-content">
-				建议学Java，这个学的人多，遇到问题比较容易找到解决方案这是慕课网推荐的Java工程师学习路径，零基础也可以入门：http://www.imooc.com/course/programdetail/pid/31求采纳！
-				建议学Java，这个学的人多，遇到问题比较容易找到解决方案这是慕课网推荐的Java工程师学习路径，零基础也可以入门：http://www.imooc.com/course/programdetail/pid/31求采纳！
-			</div>
-
-			<!-- 控制 -->
-			<div class="ctrl-bar">
-				<span class="agree-with"><b>赞同</b><em>10</em></span> <span
-					class="oppose"><b>反对</b><em>3</em></span>
-			</div>
-
+		<div class="list-container">
+			<div class="ques-list-item"><div class="from-tag"><span>由 </span><b>suixue</b><span> 提问 </span> <span>标签：<a href="javascript:void(0)" class="classfy-tag">英语</a><a href="javascript:void(0)" class="classfy-tag">化学</a><a href="javascript:void(0)" class="classfy-tag">政治</a></span></div><div><a href="" class="ques-title">suixueya</a></div><div class="ans-user"><span>由 </span><b>lisi  教师</b><span> 回答 </span></div><div class="ans-content">fdad</div><div class="ctrl-bar"><span class="agree-with"><b>赞同</b><em>2</em></span> <span class="oppose"><b>反对</b><em>1</em></span> <span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</b></span></div></div>
 		</div>
-
-		<div class="ques-list-item">
-
-			<!-- 由谁提问 -->
-			<div class="from-tag">
-				<span>由 <span><b>隋雪</b><span> 提问 </span> <span>标签：
-							<a href="javascript:void(0)" class="classfy-tag">java</a> <a
-							href="javascript:void(0)" class="classfy-tag">python</a>
-					</span>
-			</div>
-
-			<!-- 提问的标题 -->
-			<div>
-				<a href="" class="ques-title">我不会学java怎么办！！</a>
-			</div>
-
-			<div class="ans-user">
-				<span>由 <span><b>卢燕宁 老师</b><span> 回答 </span>
-			</div>
-			<!-- 回答的内容 -->
-			<div class="ans-content">
-				建议学Java，这个学的人多，遇到问题比较容易找到解决方案这是慕课网推荐的Java工程师学习路径，零基础也可以入门：http://www.imooc.com/course/programdetail/pid/31求采纳！
-				建议学Java，这个学的人多，遇到问题比较容易找到解决方案这是慕课网推荐的Java工程师学习路径，零基础也可以入门：http://www.imooc.com/course/programdetail/pid/31求采纳！
-			</div>
-
-			<!-- 控制 -->
-			<div class="ctrl-bar">
-				<span class="agree-with" ask-user-id="" ans-user-id=""><b>赞同</b><em>2</em></span>
-				<span class="oppose" ask-user-id="" ans-user-id=""><b>反对</b><em>3</em></span>
-				<span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</span>
-			</div>
-		</div>
-
-		<div class="ques-list-item">
-
-			<!-- 由谁提问 -->
-			<div class="from-tag">
-				<span>由 <span><b>隋雪</b><span> 提问 </span> <span>标签：
-							<a href="javascript:void(0)" class="classfy-tag">java</a> <a
-							href="javascript:void(0)" class="classfy-tag">python</a>
-					</span>
-			</div>
-
-			<!-- 提问的标题 -->
-			<div>
-				<a href="" class="ques-title">我不会学java怎么办！！</a>
-			</div>
-
-			<!-- 控制 -->
-			<div class="ctrl-bar">
-				<span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</span>
-			</div>
-		</div>
-
 		<!-- 分页条 -->
 		<div class="page">
 			<nav aria-label="Page navigation">
@@ -170,11 +205,11 @@ html {
 					<li><a href="#" aria-label="Previous"> <span
 							aria-hidden="true">&laquo;</span>
 					</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<li><a href="#">首页</a></li>
+					<li><a href="#">上一页</a></li>
+					<li><a href="#">当前第1页</a></li>
+					<li><a href="#">下一页</a></li>
+					<li><a href="#">尾页</a></li>
 					<li><a href="#" aria-label="Next"> <span
 							aria-hidden="true">&raquo;</span>
 					</a></li>

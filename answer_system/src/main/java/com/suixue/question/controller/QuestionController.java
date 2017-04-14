@@ -13,15 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
+import com.suixue.common.Page;
 import com.suixue.discuss.domain.Discuss;
 import com.suixue.discuss.service.DiscussService;
 import com.suixue.question.domain.Question;
+import com.suixue.question.domain.QuestionParam;
 import com.suixue.question.domain.Type;
 import com.suixue.question.service.QuestionService;
 import com.suixue.question.service.TypeService;
 import com.suixue.user.domain.User;
+import com.suixue.user.domain.UserRole;
+import com.suixue.user.service.UserRoleService;
+import com.suixue.user.service.UserService;
 
 @Controller
 @RequestMapping("/question")
@@ -33,7 +39,10 @@ public class QuestionController extends BaseController  {
 	private DiscussService discussService;
 	@Autowired
 	private TypeService typeService;
-	
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
 	/**
 	 * 查询所有的问题列表
 	 * @return
@@ -57,10 +66,14 @@ public class QuestionController extends BaseController  {
 	 */
 	@RequestMapping(value = "/query/param", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse queryQuestionsByParam(Question question, Model model, HttpServletRequest request,
+	public BaseResponse queryQuestionsByParam(QuestionParam question, Model model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
+		PageHelper.startPage(question.getPageNo(), question.getPageSize());
 		List<Question> questionList = questionService.queryQuestionsByParam(question);
-        return success(questionList);
+		
+		Page<Question> page = new Page<>();
+		page.setPageData(questionList);
+        return success(page);
 	}
 	
 	/**
@@ -142,21 +155,38 @@ public class QuestionController extends BaseController  {
 	 */
 	@RequestMapping(value = "/getQuestionListData", method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse getQuestionList(Question question, Model model, HttpServletRequest request,
+	public BaseResponse getQuestionList(QuestionParam question, Model model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		List<Question> questionList = new ArrayList<>();
+		
 		if(question == null){
+			PageHelper.startPage(question.getPageNo(), question.getPageSize());
 			questionList = questionService.getList();
 		}else{
+			PageHelper.startPage(question.getPageNo(), question.getPageSize());
 			questionList = questionService.queryQuestionsByParam(question);
 		}
 		for(Question q : questionList){
+			q.setCreateUserName(userService.getUserNameById(q.getCreateUserId()).getName());
 			Discuss discuss = new Discuss();
 			discuss.setListnerId(q.getCreateUserId());
 			discuss.setQuestionId(q.getId());
-			q.setBestDiscuss(discussService.querybestDiscusssByParam(discuss));
+			Discuss bestDiscuss = discussService.querybestDiscusssByParam(discuss);
+			if(bestDiscuss != null){
+				String speakerId = bestDiscuss.getSpeakerId();
+				UserRole ur = userRoleService.getUserRole(speakerId);
+				if(ur.getRoleId().equals("1")){//回答者是老师
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  教师"));
+				}else if(ur.getRoleId().equals("2")){//回答者是学生
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  学生"));
+				}
+			}			
+			q.setBestDiscuss(bestDiscuss);
 		}
-        return success(questionList);
+		
+		Page<Question> page = new Page<>();
+		page.setPageData(questionList);
+        return success(page);
 	}
 }
 

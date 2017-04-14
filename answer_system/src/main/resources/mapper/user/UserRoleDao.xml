@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suixue.user.dao.UserRoleDao">
+	
+	<insert id="insert" parameterType="com.suixue.user.domain.UserRole">
+		INSERT INTO `user_role`(
+			`id`,
+			`user_id`,
+			`role_id`
+		)
+		VALUES
+		(
+			#{id},
+			#{userId},
+			#{roleId}
+		)
+	</insert>
+	
+	<select id="getUserRole" resultType="com.suixue.user.domain.UserRole">
+		SELECT 
+			u.role_id as "roleId" 
+		FROM
+			`user_role` u 
+		where u.user_id=#{userId}
+	</select>
+</mapper>

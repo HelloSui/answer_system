@@ -15,6 +15,7 @@
 		</div>
 		<div class="navbar-collapse collapse" role="navigation">
 			<ul class="nav navbar-nav">
+			${ctx }
 				<li><a href="${ctx}home/home" onclick="">首页</a></li>
 				<li><a href="${ctx}discuss/discussList" onclick="">我要回答</a></li>
 				<li><a href="${ctx}question/ask" onclick="">我要提问</a></li>
@@ -28,10 +29,10 @@
 
 
 <script type="text/javascript">
-	$(function() {
+	/*$(function() {
 		$('.nav.navbar-nav li').on('click', function() {
 			$(this).closest('ul').find('li').removeClass('active');
 			$(this).addClass('active');
 		});
-	});
+	});*/
 </script>

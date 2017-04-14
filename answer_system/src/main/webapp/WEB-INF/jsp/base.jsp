@@ -12,5 +12,6 @@
 <script src="${ctx}/static/bootstrap/js/jquery-2.1.1.js"></script>
 <script src="${ctx}/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="${ctx}/static/bootstrap/js/jquery.validate.js"></script>
+<script src="${ctx}/static/js/grid.js"></script>
 
 

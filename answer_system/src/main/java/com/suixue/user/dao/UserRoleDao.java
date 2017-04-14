@@ -5,5 +5,5 @@ import com.suixue.user.domain.User;
 import com.suixue.user.domain.UserRole;
 
 public interface UserRoleDao extends BaseDao<UserRole>{
-	
+	UserRole getUserRole(String userId);
 }
