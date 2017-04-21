@@ -13,7 +13,8 @@
 			d.create_time as createTime, 
 			d.update_time as updateTime,
 			d.agree_times as "agreeTimes",
-			d.oppose_times as "opposeTimes"
+			d.oppose_times as "opposeTimes",
+			d.last_level as "lastLevel"
 		FROM
 			`discuss` d 
 		where 1 = 1
@@ -30,7 +31,8 @@
 			d.create_time as createTime, 
 			d.update_time as updateTime,
 			d.agree_times as "agreeTimes",
-			d.oppose_times as "opposeTimes"
+			d.oppose_times as "opposeTimes",
+			d.last_level as "lastLevel"
         from `discuss` d 
         where 1=1
         <if test="id != null and id != ''">
@@ -54,6 +56,9 @@
         <if test="opposeTimes != null and opposeTimes != ''">
             and d.oppose_times = #{opposeTimes}
         </if>
+          <if test="lastLevel != null and lastLevel != ''">
+            and d.last_level = #{lastLevel}
+        </if>
         order by d.create_time desc
     </select>
 	
@@ -63,7 +68,8 @@
 			`question_id`,
 			`speaker_id`,
 			`listner_id`,
-			`content`
+			`content`,
+			`last_level`
 		)
 		VALUES
 		(
@@ -71,7 +77,8 @@
 			#{questionId},
 			#{speakerId},
 			#{listnerId},
-			#{content}
+			#{content},
+			#{lastLevel}
 		)
 	</insert>
 	
@@ -83,7 +90,8 @@
 		content = #{content},
 		update_time = #{updateTime},
 		agree_times = #{agreeTimes},
-		oppose_times = #{opposeTimes}
+		oppose_times = #{opposeTimes},
+		last_level = #{lastLevel}
 		where id=#{id}
 	</update>
 	
@@ -107,10 +115,15 @@
 			d.create_time as createTime, 
 			d.update_time as updateTime,
 			d.agree_times as "agreeTimes",
-			d.oppose_times as "opposeTimes"
+			d.oppose_times as "opposeTimes",
+			d.last_level as "lastLevel"
 		FROM
 			`discuss` d 
 		where d.listner_id = #{listnerId} and d.question_id = #{questionId}
 	 	order by agree_times desc limit 1
 	</select>
+	
+	 <select id="queryAnswerNum" resultType="Integer">
+        select count(*) from discuss where question_id =#{questionId} and last_level = '0'
+    </select>
 </mapper>

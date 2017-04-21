@@ -167,7 +167,9 @@ public class QuestionController extends BaseController  {
 			questionList = questionService.queryQuestionsByParam(question);
 		}
 		for(Question q : questionList){
-			q.setCreateUserName(userService.getUserNameById(q.getCreateUserId()).getName());
+			String id = q.getCreateUserId();
+			User user = userService.getUserNameById(id);
+			q.setCreateUserName(user.getName());
 			Discuss discuss = new Discuss();
 			discuss.setListnerId(q.getCreateUserId());
 			discuss.setQuestionId(q.getId());

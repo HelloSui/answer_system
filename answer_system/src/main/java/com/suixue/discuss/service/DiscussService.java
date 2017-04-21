@@ -31,5 +31,11 @@ public class DiscussService extends BaseService<Discuss, BaseDao<Discuss>> {
 	public Discuss  querybestDiscusssByParam(Discuss discuss){
 		return discussDao.querybestDiscusssByParam(discuss);
 	}
+	
+	public int queryAnswerNum(String questionId){
+		int answerNum = 0;
+		answerNum = discussDao.queryAnswerNum(questionId);
+		return answerNum;
+	}
 }
 

@@ -1,5 +1,6 @@
 package com.suixue.discuss.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
+import com.suixue.discuss.domain.AnswerList;
+import com.suixue.discuss.domain.AnswerVO;
 import com.suixue.discuss.domain.Discuss;
 import com.suixue.discuss.service.DiscussService;
+import com.suixue.question.domain.Question;
+import com.suixue.question.service.QuestionService;
+import com.suixue.user.service.UserService;
 
 @Controller
 @RequestMapping("/discuss")
@@ -23,6 +29,10 @@ public class DiscussController extends BaseController  {
 	
 	@Autowired
 	private DiscussService discussService;
+	@Autowired
+	private QuestionService questionService;
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 查询所有讨论列表
@@ -130,4 +140,67 @@ public class DiscussController extends BaseController  {
 		return "discussList";
 	}
 	
+	@RequestMapping(value="/answer",method=RequestMethod.GET)
+	public String getAnswerPage() {
+		
+		return "answerList";
+	}
+	
+	@RequestMapping(value = "/answerQuestion", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse answerQuestion(String questionId, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		//questionId = "1";
+		AnswerVO answerVO = new AnswerVO();
+		Question question = new Question();	
+		question  = questionService.queryQuestionsById(questionId);
+		String name = userService.getUserNameById(question.getCreateUserId()).getName();
+		question.setCreateUserName(name);
+		answerVO.setQuestion(question);
+		int answerNum = discussService.queryAnswerNum(questionId);
+		answerVO.setAnswerNum(answerNum);
+		//该问题的直接回答列表，其中包括这些回答的所有回复
+		List<AnswerList> answerList = new ArrayList();
+		Discuss param = new Discuss();
+		param.setLastLevel("0");
+		param.setQuestionId(questionId);
+		List<Discuss> derectAnswer = new ArrayList();
+		//该问题的所有直接回答
+		derectAnswer = discussService.queryDiscussesByParam(param);
+		if(derectAnswer!=null){
+			for(Discuss da:derectAnswer){
+				AnswerList anList = new AnswerList();
+				anList.setAnswerUserId(da.getSpeakerId());
+				anList.setAgreeTimes(da.getAgreeTimes());
+				anList.setAnswerContent(da.getContent());
+				anList.setOpposeTimes(da.getOpposeTimes());
+				String answerUserName =  userService.getUserNameById(da.getSpeakerId()).getName();
+				anList.setAnswerUserName(answerUserName);
+				anList.setCreateTime(da.getCreateTime());
+				anList.setUpdateTime(da.getUpdateTime());
+				anList.setLastLevel(da.getLastLevel());
+				Discuss disParam = new Discuss();
+				disParam.setQuestionId(questionId);
+				disParam.setLastLevel(da.getId());
+				disParam.setListnerId(da.getSpeakerId());
+				disParam.setLastLevel(da.getId());
+				List<Discuss> answerSimpleList = new ArrayList();
+				answerSimpleList = discussService.queryDiscussesByParam(disParam);
+				if(answerSimpleList!=null){
+					anList.setAnswerNum(answerSimpleList.size());
+					for(Discuss p:answerSimpleList){
+						String aun =  userService.getUserNameById(p.getSpeakerId()).getName();
+						p.setSpeakerName(aun);
+					}
+					
+				}else{
+					anList.setAnswerNum(0);
+				}
+				anList.setDiscussList(answerSimpleList);
+				answerList.add(anList);
+			}
+		}
+		answerVO.setAnswerList(answerList);
+		return success(answerVO);
+	}
 }

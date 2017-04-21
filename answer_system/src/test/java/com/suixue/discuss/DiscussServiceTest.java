@@ -32,12 +32,12 @@ public class DiscussServiceTest {
 	@Test
 	public void testSelectByParam() {	
 		Discuss discuss = new Discuss();
-		discuss.setId("3");
+		discuss.setQuestionId("1");
 //		discuss.setQuestionId("3");
 //		discuss.setListnerId("2");
 //		discuss.setSpeakerId("3");
 		//discuss.setContent("试试");
-	
+	discuss.setLastLevel("0");
 		List<Discuss> result = discussDao.queryDiscussesByParam(discuss);
 		for(Discuss e:result){
 			System.out.println(e.toString());
@@ -89,5 +89,10 @@ public class DiscussServiceTest {
 			System.out.println("null");
 		}
 		System.out.println(result.toString());
+	}
+	@Test
+	public void testSelectNum() {
+		int num = discussDao.queryAnswerNum("3");
+		System.out.println(num);
 	}
 }

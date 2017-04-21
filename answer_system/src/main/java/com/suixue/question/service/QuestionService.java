@@ -5,6 +5,7 @@ import com.suixue.question.domain.Type;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.suixue.common.BaseDao;
 import com.suixue.common.BaseService;
@@ -31,10 +32,12 @@ public class QuestionService extends BaseService<Question, BaseDao<Question>> {
 		for(Question q : questions) {
 			String typeIds = q.getTypeId();
 			
-			List<Type> types = typeDao.queryQuestionTypesByParam(typeIds);
-			
-			String idTypeString = createIdTypeString(types);
-			q.setTypeId(idTypeString.substring(0, idTypeString.length() - 1));
+			if(!StringUtils.isEmpty(typeIds)){
+				List<Type> types = typeDao.queryQuestionTypesByParam(typeIds);
+				
+				String idTypeString = createIdTypeString(types);
+				q.setTypeId(idTypeString.substring(0, idTypeString.length() - 1));
+			}
 		}
 		return questions;
 	}	
@@ -49,6 +52,11 @@ public class QuestionService extends BaseService<Question, BaseDao<Question>> {
 		}
 		
 		return sb.toString();
+	}
+	
+	public Question queryQuestionsById(String id){
+		Question question = questionDao.queryQuestionsById(id);
+		return question;
 	}
 }
 

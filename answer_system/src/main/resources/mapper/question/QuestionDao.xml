@@ -76,4 +76,18 @@
 		delete from question
 		where id=#{id}
 	</delete>
+	
+	<select id="queryQuestionsById" resultType="com.suixue.question.domain.Question">
+        select  
+        	q.id,
+			q.description,
+			q.title,
+			q.type_id as "typeId",
+			q.create_user_id as "createUserId", 
+			q.create_time as createTime, 
+			q.update_time as updateTime
+        from `question` q 
+        where q.id = #{id}
+        order by q.create_time desc
+    </select>
 </mapper>

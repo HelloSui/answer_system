@@ -86,4 +86,11 @@ public class QuestionServiceTest {
 		}
 		//userDao.insertUser(user);
 	}
+	
+	@Test
+	public void testSelectById() {	
+		Question question = new Question();
+		question = questionDao.queryQuestionsById("5");
+			System.out.println(question.toString());
+	}
 }

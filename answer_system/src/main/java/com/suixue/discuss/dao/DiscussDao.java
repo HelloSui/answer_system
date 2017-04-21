@@ -19,4 +19,12 @@ public interface DiscussDao extends BaseDao<Discuss> {
 	 * @return
 	 */
 	Discuss querybestDiscusssByParam(Discuss discuss);
+	
+	
+	/**
+	 * 查询某一个问题的回答数量
+	 * @param questionId
+	 * @return
+	 */
+	int queryAnswerNum(String questionId);
 }

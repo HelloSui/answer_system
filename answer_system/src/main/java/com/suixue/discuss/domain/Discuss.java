@@ -9,6 +9,9 @@ public class Discuss extends DataEntity{
 	private String content;
 	private String agreeTimes;
 	private String opposeTimes;
+	private String lastLevel;
+	private String speakerName;
+	private String listnerName;
 	
 	public String getId() {
 		return id;
@@ -55,9 +58,35 @@ public class Discuss extends DataEntity{
 	public void setOpposeTimes(String opposeTimes) {
 		this.opposeTimes = opposeTimes;
 	}
+	
+	public String getLastLevel() {
+		return lastLevel;
+	}
+
+	public void setLastLevel(String lastLevel) {
+		this.lastLevel = lastLevel;
+	}
+	
+
+	public String getSpeakerName() {
+		return speakerName;
+	}
+
+	public void setSpeakerName(String speakerName) {
+		this.speakerName = speakerName;
+	}
+
+	public String getListnerName() {
+		return listnerName;
+	}
+
+	public void setListnerName(String listnerName) {
+		this.listnerName = listnerName;
+	}
+
 	@Override
 	public String toString() {
-		return "Discuss [id=" + id + ", questionId=" + questionId + ", speakerId=" + speakerId + ", listnerId=" + listnerId + ",agreeTimes=" + agreeTimes + ",opposeTimes=" + opposeTimes + ", content=" + content + "]";
+		return "Discuss [id=" + id + ", questionId=" + questionId + ", speakerId=" + speakerId + ", listnerId=" + listnerId + ",agreeTimes=" + agreeTimes + ",opposeTimes=" + opposeTimes + ",lastLevel=" + lastLevel +",speakerName=" + speakerName +",listnerName=" + listnerName + ", content=" + content + "]";
 	}
 	
 }

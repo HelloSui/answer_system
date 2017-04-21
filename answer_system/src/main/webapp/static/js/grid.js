@@ -2,10 +2,12 @@ $(function(){
 	
 	String.prototype.format = function() {
 		var i = 0, args = arguments;
-		return this.replace(/%s/g, function() {
+		var res = this;
+		for (i in args) {
 			var v = args[i++];
-			return v !== undefined ? v : '';
-		});
+			res = res.replace(/%s/, v);
+		}
+		return res;
 	};
 	
 	$('.responsive-table-container').on('click','[role="delete"]',function(){

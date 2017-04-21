@@ -27,4 +27,12 @@ public interface QuestionDao extends BaseDao<Question> {
 	 * @return
 	 */
 	List<Question> getQuestionList(Question question);
+	
+	/**
+	 * 根据问题id进行查询
+	 * @param id
+	 * @return
+	 */
+	Question queryQuestionsById(String id);
+
 }

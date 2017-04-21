@@ -82,7 +82,22 @@ html {
 	$(function(){
 		$('.list-container').on('click','.agree-with',function(){
 			var agreeNum = $(this).children('em').html();
+			agreeNum = agreeNum+1;
 			alert(agreeNum);
+			var id =  $('#discussId').val();
+			alert(id);
+			var postData = {
+				'id' : id,
+				'agreeTimes':4
+			};
+			$.post("${ctx}/discuss/update", postData, function(result) {
+				if (result.retCode == 0) {
+					alert('点赞成功');
+					document.location.href = "${ctx}/discuss/discussList";
+				} else {
+					alert('点赞失败');
+				}
+			});
 		});
 		
 		$('.list-container').on('click','.oppose',function(){
@@ -135,6 +150,9 @@ html {
 			
 
 									var bestDiscuss = item.bestDiscuss;
+									if(bestDiscuss){
+										var discussId = bestDiscuss.id;
+									}
 
 									var labelTag = '';
 
@@ -177,6 +195,7 @@ html {
 											+ answerUserTag + ansContentTag
 											+ ctrlBarTag + '</div>';
 
+									itemHtml+= '<input type="hidden" id="discussId" value="%s"/>'.format(discussId);
 									dataHtml += itemHtml;
 									itemHtml = '';
 
