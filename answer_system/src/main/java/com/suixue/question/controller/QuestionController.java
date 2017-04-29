@@ -17,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
 import com.suixue.common.Page;
+import com.suixue.common.ReturnCode;
 import com.suixue.discuss.domain.Discuss;
 import com.suixue.discuss.service.DiscussService;
 import com.suixue.question.domain.Question;
@@ -104,12 +105,17 @@ public class QuestionController extends BaseController  {
 	@ResponseBody
 	public BaseResponse update(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		questionService.update(question);		
-		return success(question);
+		if(discussService.isExistAnswerOfQuestion(question.getId())){
+			BaseResponse rsp = new BaseResponse(ReturnCode.UPDATE_QUESTION_FAILURE);
+			return rsp ;
+		}else{
+			questionService.update(question);		
+			return success(question);
+		}
 	}
 	
 	/**
-	 * 删除一个问题记录，同时删除该问题的所有讨论列表
+	 * 删除一个问题记录
 	 * @param question
 	 * @param model
 	 * @param request
@@ -120,9 +126,13 @@ public class QuestionController extends BaseController  {
 	@ResponseBody
 	public BaseResponse delete(Question question, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		questionService.delete(question);
-		discussService.deleteByQuestionId(question.getId());
-		return success(question);
+		if(discussService.isExistAnswerOfQuestion(question.getId())){
+			BaseResponse rsp = new BaseResponse(ReturnCode.DELETE_QUESTION_FAILURE);
+			return rsp ;
+		}else{
+			questionService.delete(question);
+			return success(question);
+		}
 	}
 	
 	@RequestMapping(value = "/ask", method = RequestMethod.GET)

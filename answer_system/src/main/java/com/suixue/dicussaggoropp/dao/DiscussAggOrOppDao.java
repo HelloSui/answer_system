@@ -1,9 +1,9 @@
 package com.suixue.dicussaggoropp.dao;
 
 import com.suixue.common.BaseDao;
-import com.suixue.question.domain.Type;
+import com.suixue.dicussaggoropp.domain.DiscussAggOrOpp;
 
-public interface DiscussAggOrOppDao extends BaseDao<Type> {
+public interface DiscussAggOrOppDao extends BaseDao<DiscussAggOrOpp> {
 
 }
 

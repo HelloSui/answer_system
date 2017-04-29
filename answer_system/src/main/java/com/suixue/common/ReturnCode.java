@@ -8,7 +8,10 @@ public enum ReturnCode {
 	
 	LOGIN_FAILURE("2017001", "username or password is not correct!"),
 	
-	REGISTER_FAILURE("2017002", "register failure!");
+	REGISTER_FAILURE("2017002", "register failure!"),
+	UPDATE_QUESTION_FAILURE("2017003","该问题已被回答，不能更改"),
+	DELETE_QUESTION_FAILURE("2017004","该问题已被回答，不能删除"),
+	DELETE_ANSWER_FAILURE("2017005","该回答已被回复，不能删除");
 
 	private String retCode;
 	private String retDesc;

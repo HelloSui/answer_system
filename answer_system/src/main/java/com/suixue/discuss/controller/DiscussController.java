@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
+import com.suixue.common.ReturnCode;
 import com.suixue.dicussaggoropp.domain.DiscussAggOrOpp;
 import com.suixue.dicussaggoropp.service.DiscussAggOrOppService;
 import com.suixue.discuss.domain.AnswerList;
@@ -105,7 +106,7 @@ public class DiscussController extends BaseController  {
 	}
 	
 	/**
-	 * 根据讨论id删除一条讨论记录
+	 * 根据讨论id删除一条讨论记录,前提是这个回答没有被回复过
 	 * @param discuss
 	 * @param model
 	 * @param request
@@ -116,8 +117,15 @@ public class DiscussController extends BaseController  {
 	@ResponseBody
 	public BaseResponse delete(Discuss discuss, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		discussService.delete(discuss);		
-		return success(discuss);
+		if(discussService.isExistReplyOfAnswer(discuss.getId())){
+			BaseResponse rsp = new BaseResponse(ReturnCode.DELETE_ANSWER_FAILURE);
+			return rsp ;
+		}else{
+			discussService.delete(discuss);	
+			return success(discuss);
+		}
+		
+		
 	}
 	
 	/**
