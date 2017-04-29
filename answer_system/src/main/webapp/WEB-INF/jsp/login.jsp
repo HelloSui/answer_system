@@ -56,14 +56,26 @@ form {
 			var username = $('#username').val();
 			var password = $('#password').val();
 			checkInput(username, password);
+			
+			var data = {};
+			data.name=username;
+			data.password = password;
 			if(text == '注册') {
-				
+				var typeId = $('input[type="radio"]:checked').val();
+				data.roleId = typeId;
+				$.post('${ctx}user/register', data, function(result) {
+					//成功
+					if(result.retCode == 0) {
+						window.location.href="${ctx}user/login";
+					}
+					else {
+						alert('注册失败');
+						window.location.href="${ctx}user/login";
+					}
+				});
 			}
 			//登陆
 			else{
-				var data = {};
-				data.name=username;
-				data.password = password;
 				$.post('${ctx}user/login', data, function(result) {
 					//成功
 					if(result.retCode == 0) {
@@ -71,6 +83,7 @@ form {
 					}
 					else {
 						alert('登陆失败');
+						window.location.href="${ctx}user/login";
 					}
 				});
 			}
@@ -78,10 +91,9 @@ form {
 		
 		function checkInput(username, password) {
 			if(username.length!=0 && password.length!=0) {
-				alert('success');
 			}
 			else{
-				alert('用户名密码不能为kong');
+				alert('用户名密码不能为空');
 			}
 		}
 		
@@ -119,8 +131,8 @@ form {
 				</div>
 			</div>
 			<div class="user-type">
-				<span><input type="radio" name="inputLogType" id="splunk">教师
-				</span><span><input type="radio" name="inputLogType" id="pig">学生</span>
+				<span><input type="radio" name="inputLogType" id="splunk" value="1">教师
+				</span><span><input type="radio" name="inputLogType" id="pig" value="2">学生</span>
 			</div>
 			<div class="form-group">
 				<button id="submit" type="submit" class="btn btn-warning">登录</button>
