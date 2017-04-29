@@ -28,13 +28,13 @@ public class LoginController extends BaseController {
 	@Autowired
 	private UserRoleService userRoleService;
 
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/login")
 	public String getLogin() {
 		return "login";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginData", method = RequestMethod.POST)
 	public BaseResponse validateLogin(User user, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		User userResult = userService.get(user);
@@ -48,11 +48,11 @@ public class LoginController extends BaseController {
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute(userResult.getId());
 		if(loginUser == null) {
-			session.setAttribute(userResult.getId(), userResult);
+			session.setAttribute("user", userResult);
 		}
 		//登录成功，跳转至主页面
 		
-		return success();
+		return success(loginUser);
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -75,5 +75,17 @@ public class LoginController extends BaseController {
 		userRoleService.insert(param);
 		
 		return "redirect:home";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public BaseResponse logout(String userId, HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		//存放session
+		//注销
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
+		
+		return success();
 	}
 }

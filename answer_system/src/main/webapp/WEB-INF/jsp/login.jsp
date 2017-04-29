@@ -33,20 +33,19 @@ form {
 		$('.user-type').css('display', 'none');
 		//登录逻辑
 		$(".nav.nav-tabs > li:first").click(function() {
-			setForm($(this), '${ctx}/user/login', '登录');
+			setForm($(this), '${ctx}user/login', '登录');
 			$('.user-type').css('display', 'none');
 
 		});
 		//注册逻辑
 		$(".nav.nav-tabs > li:last").click(function() {
-			setForm($(this), '${ctx}user/register', '注册');
+			setForm($(this), '${ctx}userregister', '注册');
 			$('.user-type').css('display', 'block');
 		});
 
 		function setForm($this, url, btnValue) {
 			$this.siblings().removeClass('active');
 			$this.addClass('active');
-			$this.closest('form').attr('action', url);
 			$this.closest('form').find('button').text(btnValue);
 		}
 		
@@ -76,10 +75,10 @@ form {
 			}
 			//登陆
 			else{
-				$.post('${ctx}user/login', data, function(result) {
+				$.post('${ctx}user/loginData', data, function(result) {
 					//成功
 					if(result.retCode == 0) {
-						window.location.href="${ctx}home/home";
+						window.location.href="${ctx}home";
 					}
 					else {
 						alert('登陆失败');

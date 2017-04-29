@@ -18,8 +18,8 @@
         <!--配置连接池属性-->
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/answer_system"/>
-        <property name="user" value="suixue"/>
-        <property name="password" value="123456"/>
+        <property name="user" value="root"/>
+        <property name="password" value="1234"/>
         <!--c3p0连接池的私有属性 -->
         <property name="maxPoolSize" value="30"/>
         <property name="minPoolSize" value="10"/>
