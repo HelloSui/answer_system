@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
 import com.suixue.common.BaseResponse;
+import com.suixue.dicussaggoropp.domain.DiscussAggOrOpp;
+import com.suixue.dicussaggoropp.service.DiscussAggOrOppService;
 import com.suixue.discuss.domain.AnswerList;
 import com.suixue.discuss.domain.AnswerVO;
 import com.suixue.discuss.domain.Discuss;
 import com.suixue.discuss.service.DiscussService;
 import com.suixue.question.domain.Question;
+import com.suixue.question.domain.Type;
 import com.suixue.question.service.QuestionService;
+import com.suixue.question.service.TypeService;
 import com.suixue.user.service.UserService;
 
 @Controller
@@ -33,6 +37,11 @@ public class DiscussController extends BaseController  {
 	private QuestionService questionService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TypeService typeService;
+	@Autowired
+	private DiscussAggOrOppService discussAggOrOppService;
+	
 	
 	/**
 	 * 查询所有讨论列表
@@ -128,7 +137,11 @@ public class DiscussController extends BaseController  {
 	}
 	
 	@RequestMapping(value="/discussList",method=RequestMethod.GET)
-	public String getAnswerList() {
+	public String getAnswerList(Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		//将问题标签写入到jsp
+		List<Type> allQuestionTypeList = typeService.getList();
+		model.addAttribute("allQuestionType",allQuestionTypeList);
 		return "discussList";
 	}
 	
@@ -202,5 +215,88 @@ public class DiscussController extends BaseController  {
 		}
 		answerVO.setAnswerList(answerList);
 		return success(answerVO);
+	}
+	
+	/**
+	 * 点击赞同时
+	 * @param discuss
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/agree", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse agree(String discussId,String userId, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		DiscussAggOrOpp discussAggOrOpp = new DiscussAggOrOpp();
+		discussAggOrOpp.setUserId(userId);
+		discussAggOrOpp.setDiscussId(discussId);
+		Discuss param = new Discuss();
+		param.setId(discussId);
+		Discuss discuss = discussService.get(param);
+		int num = discussAggOrOppService.agree(discussAggOrOpp);
+		if(num == 0){
+			//该用户对于这个回答本来就有赞同票
+		}else if(num == 1){//该用户对于这个回答没有赞同票或者反对票
+			int times = Integer.valueOf(discuss.getAgreeTimes());
+			times++;
+			String finalTimes = String.valueOf(times);	
+			discuss.setAgreeTimes(finalTimes);
+			discussService.update(discuss);		
+		}else{//该用户对于这个回答有反对票
+			int timesOne = Integer.valueOf(discuss.getAgreeTimes());
+			timesOne++;
+			String finalTimes = String.valueOf(timesOne);
+			discuss.setAgreeTimes(finalTimes);
+			int timesTwo = Integer.valueOf(discuss.getOpposeTimes());
+			timesTwo--;
+			String finalTimesTwo = String.valueOf(timesOne);
+			discuss.setOpposeTimes(finalTimesTwo);
+			discussService.update(discuss);		
+		}		
+		return success(discuss);
+	}
+	
+	/**
+	 * 点击反对时
+	 * @param discussId
+	 * @param userId
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/oppose", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse oppose(String discussId,String userId, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		DiscussAggOrOpp discussAggOrOpp = new DiscussAggOrOpp();
+		discussAggOrOpp.setUserId(userId);
+		discussAggOrOpp.setDiscussId(discussId);
+		Discuss param = new Discuss();
+		param.setId(discussId);
+		Discuss discuss = discussService.get(param);
+		int num = discussAggOrOppService.agree(discussAggOrOpp);
+		if(num == 0){
+			//该用户对于这个回答本来就有反对
+		}else if(num == 1){//该用户对于这个回答没有赞同票或者反对票
+			int times = Integer.valueOf(discuss.getOpposeTimes());
+			times++;
+			String finalTimes = String.valueOf(times);	
+			discuss.setOpposeTimes(finalTimes);
+			discussService.update(discuss);		
+		}else{//该用户对于这个回答有赞同票没有反对票
+			int timesOne = Integer.valueOf(discuss.getOpposeTimes());
+			timesOne++;
+			String finalTimes = String.valueOf(timesOne);	
+			discuss.setOpposeTimes(finalTimes);
+			int timesTwo = Integer.valueOf(discuss.getAgreeTimes());
+			timesTwo--;
+			String finalTimesTwo = String.valueOf(timesOne);
+			discuss.setAgreeTimes(finalTimesTwo);
+			discussService.update(discuss);		
+		}		
+		return success(discuss);
 	}
 }

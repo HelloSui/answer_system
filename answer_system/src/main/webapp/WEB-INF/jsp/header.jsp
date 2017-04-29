@@ -10,18 +10,19 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand hidden-sm"
-				onclick="">课后辅导讨论系统</a>
+			<a class="navbar-brand hidden-sm" onclick="">课后辅导讨论系统</a>
 		</div>
 		<div class="navbar-collapse collapse" role="navigation">
 			<ul class="nav navbar-nav">
-			${ctx }
 				<li><a href="${ctx}home/home" onclick="">首页</a></li>
 				<li><a href="${ctx}discuss/discussList" onclick="">我要回答</a></li>
 				<li><a href="${ctx}question/ask" onclick="">我要提问</a></li>
+				<li><a href="${ctx}discuss/my/ask" onclick="">我提出的</a></li>
+				<li><a href="${ctx}discuss/my/answer" onclick="">我回答的</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right hidden-sm">
-				<li><a href="http://mb.bootcss.com" onclick="" target="_blank">登录/注册</a></li>
+				<li><a href="javascript:void(0)" data-toggle="modal"
+					data-target="#myModal">登录/注册</a></li>
 			</ul>
 		</div>
 	</div>
@@ -36,3 +37,4 @@
 		});
 	});*/
 </script>
+

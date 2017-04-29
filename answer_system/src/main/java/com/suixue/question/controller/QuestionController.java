@@ -132,7 +132,7 @@ public class QuestionController extends BaseController  {
 		User currentUser = (User) request.getSession().getAttribute("currentUser");
 		if(currentUser == null) {
 			currentUser = new User();
-			currentUser.setId("123");
+			currentUser.setId("1");
 			currentUser.setName("suixue");
 		}
 		model.addAttribute("currentUser",currentUser);
@@ -145,7 +145,7 @@ public class QuestionController extends BaseController  {
 	}
 	
 	/**
-	 * 查询附带最佳回答的问题列表
+	 * 根据参数查询附带最佳回答的问题列表
 	 * @param question
 	 * @param model
 	 * @param request
@@ -189,6 +189,89 @@ public class QuestionController extends BaseController  {
 		Page<Question> page = new Page<>();
 		page.setPageData(questionList);
         return success(page);
+	}
+	
+	/**
+	 * 返回我提出的所有问题列表，每个问题附带着一个最佳回答（若有）
+	 * @param userId
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/my/ask", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse queryQuestionsOfMyAsk(String userId, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		//userId = "1";
+		List<Question> questionList = new ArrayList<>();
+		QuestionParam questionParam = new QuestionParam();
+		questionParam.setCreateUserId(userId);
+		questionList = questionService.queryQuestionsByParam(questionParam);
+		for(Question q : questionList){
+			String id = q.getCreateUserId();
+			User user = userService.getUserNameById(id);
+			q.setCreateUserName(user.getName());
+			Discuss discuss = new Discuss();
+			discuss.setListnerId(q.getCreateUserId());
+			discuss.setQuestionId(q.getId());
+			Discuss bestDiscuss = discussService.querybestDiscusssByParam(discuss);
+			if(bestDiscuss != null){
+				String speakerId = bestDiscuss.getSpeakerId();
+				UserRole ur = userRoleService.getUserRole(speakerId);
+				if(ur.getRoleId().equals("1")){//回答者是老师
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  教师"));
+				}else if(ur.getRoleId().equals("2")){//回答者是学生
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  学生"));
+				}
+			}			
+			q.setBestDiscuss(bestDiscuss);
+		}
+        return success(questionList);
+	}
+	
+	/**
+	 * 返回我直接回答的所有问题列表，每个问题附带着一个最佳回答（若有）
+	 * @param discuss
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/my/answer", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse queryQuestionsOfMyAnswer(String userId, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		userId = "2";
+		List<String> questionIds = discussService.queryQuestionIdsOfOneAnswer(userId);
+		List<Question> questionList = new ArrayList<>();
+		for(String id:questionIds){
+			QuestionParam q = new QuestionParam();
+			q.setId(id);
+			questionList.add(questionService.queryQuestionsByParam(q).get(0));
+		}		
+		for(Question q : questionList){
+			String id = q.getCreateUserId();
+			User user = userService.getUserNameById(id);
+			q.setCreateUserName(user.getName());
+			Discuss discuss = new Discuss();
+			discuss.setListnerId(q.getCreateUserId());
+			discuss.setQuestionId(q.getId());
+			Discuss bestDiscuss = discussService.querybestDiscusssByParam(discuss);
+			if(bestDiscuss != null){
+				String speakerId = bestDiscuss.getSpeakerId();
+				UserRole ur = userRoleService.getUserRole(speakerId);
+				if(ur.getRoleId().equals("1")){//回答者是老师
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  教师"));
+				}else if(ur.getRoleId().equals("2")){//回答者是学生
+					q.setSpeakerName(userService.getUserNameById(speakerId).getName().concat("  学生"));
+				}
+			}			
+			q.setBestDiscuss(bestDiscuss);
+		}
+        return success(questionList);
 	}
 }
 

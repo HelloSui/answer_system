@@ -212,8 +212,7 @@
 			//说明有人回答
 			if (ansCount !== 0) {
 				//从后台查询
-				alert('a');
-				var $replayPanel = $(this).closest('.ques-answer .reply');
+				var $replayPanel = $(this).closest('.ques-answer').children('.reply');
 				if ($replayPanel.css('display') == 'none') {
 					$replayPanel.css('display', 'block');
 				} else {

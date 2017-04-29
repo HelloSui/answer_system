@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.suixue.common.BaseController;
+import com.suixue.common.BaseResponse;
+import com.suixue.common.ReturnCode;
 import com.suixue.user.domain.User;
 import com.suixue.user.domain.UserRole;
 import com.suixue.user.service.UserRoleService;
@@ -29,15 +32,16 @@ public class LoginController extends BaseController {
 	public String getLogin() {
 		return "login";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String validateLogin(User user, Model model, HttpServletRequest request,
+	public BaseResponse validateLogin(User user, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		User userResult = userService.get(user);
 
 		//验证失败
 		if (userResult == null) {
-			return "redirect:login";
+			return new BaseResponse(ReturnCode.LOGIN_FAILURE);
 		}
 		
 		//存放session
@@ -48,7 +52,7 @@ public class LoginController extends BaseController {
 		}
 		//登录成功，跳转至主页面
 		
-		return "answer";
+		return success();
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -70,6 +74,6 @@ public class LoginController extends BaseController {
 		param.setUserId(user.getId());
 		userRoleService.insert(param);
 		
-		return "redirect:login";
+		return "redirect:home";
 	}
 }

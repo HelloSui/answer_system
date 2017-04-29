@@ -34,6 +34,7 @@ html {
 	text-align: center;
 	padding-left: 10px;
 	padding-right: 10px;
+	margin-top:50px;
 }
 
 h4.ask-question {
@@ -145,14 +146,13 @@ form p {
 					<div class="controls">
 						<input id="title" type="text" class="ask-input form-control"
 							placeholder="请一句话说明问题，以问号结尾" /> <span class="help-block"><font
-							color="red">A longer block of help text that breaks onto a
-								new line and may extend beyond one line.</font></span>
+							color="red">问题的标题，不得多于64字！</font></span>
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
 						<textarea id="description" type="text" class="form-control"
-							cols="20" rows="10" placeholder="问题补充(选填)"></textarea>
+							cols="20" rows="10" placeholder="问题补充"></textarea>
 					</div>
 				</div>
 
@@ -173,10 +173,10 @@ form p {
 
 		<div class="container-right">
 			<h4 class="ask-question">提问注意</h4>
-			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
-			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
-			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
-			<p>1、大家每天可以免费提出两个问题，从第三个问题起，每个问题扣除2点积分，请知晓哦；</p>
+			<p>1、大家每天都可以提出问题，但是问题不在多而在精，请大家知晓哦；</p>
+			<p>2、提问时，标题、补充内容以及问题分类，都不能空下，请大家知晓哦；</p>
+			<p>3、问题的标题，不得多于64字，问题的描述，不得多于256字，请大家知晓哦；</p>
+			<p>4、如果没有提交成功，可能是因为网络等原因，请稍后重试哦；</p>
 		</div>
 
 		<input type="hidden" id="currentUserId" value="${currentUser.id}" />

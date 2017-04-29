@@ -1,5 +1,6 @@
 package com.suixue.discuss.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,21 @@ public class DiscussService extends BaseService<Discuss, BaseDao<Discuss>> {
 		int answerNum = 0;
 		answerNum = discussDao.queryAnswerNum(questionId);
 		return answerNum;
+	}
+	
+	public List<String> queryQuestionIdsOfOneAnswer(String userId){
+		List<String> result = new ArrayList<String>();
+		List<Discuss> discussOfOne = discussDao.queryQuestionIdsOfOneAnswer(userId);
+		for(Discuss d:discussOfOne){
+			if(result.isEmpty()){
+				result.add(d.getQuestionId());
+			}else{
+				if(!result.contains(d.getQuestionId())){
+					result.add(d.getQuestionId());
+				}
+			}						
+		}
+		return result;
 	}
 }
 

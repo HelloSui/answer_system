@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.suixue.discuss.dao.DiscussDao;
 import com.suixue.discuss.domain.Discuss;
+import com.suixue.discuss.service.DiscussService;
 
 //自动加载spring对应的容器
 @ContextConfiguration({"classpath:spring-mybatis.xml"})
@@ -94,5 +95,12 @@ public class DiscussServiceTest {
 	public void testSelectNum() {
 		int num = discussDao.queryAnswerNum("3");
 		System.out.println(num);
+	}
+	@Test
+	public void testSelectQuestionIds() {
+		List<Discuss> result = discussDao.queryQuestionIdsOfOneAnswer("2");
+		for(Discuss e:result){
+			System.out.println(e.toString());
+		}
 	}
 }

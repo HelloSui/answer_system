@@ -33,34 +33,23 @@
 			d.agree_times as "agreeTimes",
 			d.oppose_times as "opposeTimes",
 			d.last_level as "lastLevel"
-        from `discuss` d 
-        where 1=1
+        from `discuss` d         where 1=1
         <if test="id != null and id != ''">
-            and d.id = #{id}
-        </if>
+            and d.id = #{id} </if>
         <if test="content != null and content != ''">
-            and d.content LIKE CONCAT(CONCAT('%', #{content}), '%')
-        </if>
+            and d.content LIKE CONCAT(CONCAT('%', #{content}), '%')  </if>
         <if test="questionId != null and questionId != ''">
-            and d.question_id = #{questionId}
-        </if>
+            and d.question_id = #{questionId}  </if>
         <if test="speakerId != null and speakerId != ''">
-            and d.speaker_id = #{speakerId}
-        </if>
+            and d.speaker_id = #{speakerId}    </if>
         <if test="listnerId != null and listnerId != ''">
-            and d.listner_id = #{listnerId}
-        </if>
+            and d.listner_id = #{listnerId}    </if>
         <if test="agreeTimes != null and agreeTimes != ''">
-            and d.agree_times = #{agreeTimes}
-        </if>
+            and d.agree_times = #{agreeTimes}  </if>
         <if test="opposeTimes != null and opposeTimes != ''">
-            and d.oppose_times = #{opposeTimes}
-        </if>
-          <if test="lastLevel != null and lastLevel != ''">
-            and d.last_level = #{lastLevel}
-        </if>
-        order by d.create_time desc
-    </select>
+            and d.oppose_times = #{opposeTimes} </if>
+        <if test="lastLevel != null and lastLevel != ''">
+            and d.last_level = #{lastLevel}     </if> order by d.create_time desc </select>
 	
 	<insert id="insert" parameterType="com.suixue.discuss.domain.Discuss">
 		INSERT INTO `discuss`(
@@ -126,4 +115,23 @@
 	 <select id="queryAnswerNum" resultType="Integer">
         select count(*) from discuss where question_id =#{questionId} and last_level = '0'
     </select>
+    
+    <select id="queryQuestionIdsOfOneAnswer" resultType="com.suixue.discuss.domain.Discuss">
+		SELECT 
+			d.id,
+			d.question_id as "questionId",
+			d.speaker_id as "speakerId",
+			d.listner_id as "listnerId",
+			d.content as "content",
+			d.create_time as createTime, 
+			d.update_time as updateTime,
+			d.agree_times as "agreeTimes",
+			d.oppose_times as "opposeTimes",
+			d.last_level as "lastLevel"
+		FROM
+			`discuss` d 
+		where d.speaker_id =  #{userId} and d.last_level = '0'
+		order by d.create_time desc
+	</select>   
+    
 </mapper>

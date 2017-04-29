@@ -27,4 +27,6 @@ public interface DiscussDao extends BaseDao<Discuss> {
 	 * @return
 	 */
 	int queryAnswerNum(String questionId);
+	
+	List<Discuss> queryQuestionIdsOfOneAnswer(String userId);
 }

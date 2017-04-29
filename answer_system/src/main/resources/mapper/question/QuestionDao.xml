@@ -36,7 +36,7 @@
             and q.title LIKE CONCAT(CONCAT('%', #{title}), '%')
         </if>
         <if test="typeId != null and typeId != ''">
-            and q.type_id = #{typeId}
+            and q.type_id LIKE CONCAT(CONCAT('%', #{typeId}), '%')
         </if>
         <if test="createUserId != null and createUserId != ''">
             and q.create_user_id = #{createUserId}

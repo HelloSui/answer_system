@@ -75,20 +75,84 @@ html {
 .page {
 	text-align: center;
 }
+
+.search-wraper {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 680px;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.form-group {
+	text-align: center;
+}
+
+.form-group>input {
+	height: 45px;
+	display: inline-block;
+	width: 90%;
+	margin-right: 0;
+	border-radious: 0px;
+}
+
+.search-button {
+	display: inline-block;
+	background-color: #5cb85c;
+	color: #fff;
+	height: 45px;
+	width: 60px;
+	line-height: 45px;
+	margin: 0;
+	text-align: center;
+	padding: 0;
+	text-decoration: none;
+}
+.question-tags {
+	font-size: 14px;
+	padding: 0 9px;
+	line-height: 28px;
+	background-color: #fff;
+	border: 1px solid #d0d6d9;
+	display: inline-block;
+	cursor: pointer;
+	margin: 5px;
+	text-decoration: none !important;
+}
+.save {
+	border: 2px solid #f01400;
+	margin: 4px;
+}
+
 </style>
 </head>
 
 <script type="text/javascript">
-	$(function(){
-		$('.list-container').on('click','.agree-with',function(){
+	$(function() {
+		$('.question-tags').bind('click', function() {
+			if ($(this).hasClass('save')) {
+				$(this).removeClass('save');
+			} else {
+				$(this).addClass("save");
+			}
+		});
+		function getSelectLabelId() {
+			var labelIds = '';
+			labelIds = $('.question-tags.save').map(function() {
+				return $(this).attr('id');
+			}).get().join(',');
+			alert(labelIds);
+			return labelIds;
+		}
+		$('.list-container').on('click', '.agree-with', function() {
 			var agreeNum = $(this).children('em').html();
-			agreeNum = agreeNum+1;
+			agreeNum = agreeNum + 1;
 			alert(agreeNum);
-			var id =  $('#discussId').val();
+			var id = $('#discussId').val();
 			alert(id);
 			var postData = {
 				'id' : id,
-				'agreeTimes':4
+				'agreeTimes' : 4
 			};
 			$.post("${ctx}/discuss/update", postData, function(result) {
 				if (result.retCode == 0) {
@@ -99,13 +163,13 @@ html {
 				}
 			});
 		});
-		
-		$('.list-container').on('click','.oppose',function(){
+
+		$('.list-container').on('click', '.oppose', function() {
 			var agreeNum = $(this).children('em').html();
 			alert(agreeNum);
 		});
 	});
-	
+
 	String.prototype.format = function() {
 		var i = 0, args = arguments;
 		var res = this;
@@ -130,7 +194,8 @@ html {
 		queryParam.pageNo = pageNo;
 		queryParam.pageSize = pageSize;
 
-		$.get(
+		$
+				.get(
 						"${ctx}question/getQuestionListData",
 						queryParam,
 						function(result) {
@@ -147,10 +212,9 @@ html {
 									var description = item.description;
 									var createUserName = item.createUserName;
 									var speakerName = item.speakerName;
-			
 
 									var bestDiscuss = item.bestDiscuss;
-									if(bestDiscuss){
+									if (bestDiscuss) {
 										var discussId = bestDiscuss.id;
 									}
 
@@ -181,11 +245,14 @@ html {
 									var ansContentTag = '';
 									var ctrlBarTag = '<div class="ctrl-bar">';
 									if (bestDiscuss) {
-										answerUserTag = '<div class="ans-user"><span>由 </span><b>%s</b><span> 回答 </span></div>'.format(speakerName);
+										answerUserTag = '<div class="ans-user"><span>由 </span><b>%s</b><span> 回答 </span></div>'
+												.format(speakerName);
 										ansContentTag = '<div class="ans-content">%s</div>'
 												.format(bestDiscuss.content);
-										ctrlBarTag += '<span class="agree-with"><b>赞同</b><em>%s</em></span> '.format(bestDiscuss.agreeTimes);
-										ctrlBarTag += '<span class="oppose"><b>反对</b><em>%s</em></span> '.format(bestDiscuss.opposeTimes);
+										ctrlBarTag += '<span class="agree-with"><b>赞同</b><em>%s</em></span> '
+												.format(bestDiscuss.agreeTimes);
+										ctrlBarTag += '<span class="oppose"><b>反对</b><em>%s</em></span> '
+												.format(bestDiscuss.opposeTimes);
 									}
 									ctrlBarTag += '<span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</b></span></div>';
 
@@ -195,7 +262,8 @@ html {
 											+ answerUserTag + ansContentTag
 											+ ctrlBarTag + '</div>';
 
-									itemHtml+= '<input type="hidden" id="discussId" value="%s"/>'.format(discussId);
+									itemHtml += '<input type="hidden" id="discussId" value="%s"/>'
+											.format(discussId);
 									dataHtml += itemHtml;
 									itemHtml = '';
 
@@ -213,9 +281,41 @@ html {
 </script>
 <body>
 	<div class="container main">
-
+		<form class="search-wraper" role="search">
+			<div class="form-group">
+				<input class="form-control search clearable"
+					placeholder="搜索开源库，例如：jquery" /><a href="javascript:void(0)"
+					class="search-button">搜索</a>
+			</div>
+		</form>
+		问题分类标签：
+		<div class="control-group">
+			<c:forEach items="${allQuestionType}" var="item">
+				<a href="javascript:void(0)" id="${item.id}" class="question-tags"
+					id="1">${item.description }</a>
+			</c:forEach>
+		</div>
 		<div class="list-container">
-			<div class="ques-list-item"><div class="from-tag"><span>由 </span><b>suixue</b><span> 提问 </span> <span>标签：<a href="javascript:void(0)" class="classfy-tag">英语</a><a href="javascript:void(0)" class="classfy-tag">化学</a><a href="javascript:void(0)" class="classfy-tag">政治</a></span></div><div><a href="" class="ques-title">suixueya</a></div><div class="ans-user"><span>由 </span><b>lisi  教师</b><span> 回答 </span></div><div class="ans-content">fdad</div><div class="ctrl-bar"><span class="agree-with"><b>赞同</b><em>2</em></span> <span class="oppose"><b>反对</b><em>1</em></span> <span class="answer" ask-user-id="" ans-user-id=""><b>我要回答</b></span></div></div>
+			<div class="ques-list-item">
+				<div class="from-tag">
+					<span>由 </span><b>suixue</b><span> 提问 </span> <span>标签：<a
+						href="javascript:void(0)" class="classfy-tag">英语</a><a
+						href="javascript:void(0)" class="classfy-tag">化学</a><a
+						href="javascript:void(0)" class="classfy-tag">政治</a></span>
+				</div>
+				<div>
+					<a class="ques-title">suixueya</a>
+				</div>
+				<div class="ans-user">
+					<span>由 </span><b>lisi 教师</b><span> 回答 </span>
+				</div>
+				<div class="ans-content">fdad</div>
+				<div class="ctrl-bar">
+					<span class="agree-with"><b>赞同</b><em>2</em></span> <span
+						class="oppose"><b>反对</b><em>1</em></span> <span class="answer"
+						ask-user-id="" ans-user-id=""><b>我要回答</b></span>
+				</div>
+			</div>
 		</div>
 		<!-- 分页条 -->
 		<div class="page">

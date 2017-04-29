@@ -6,7 +6,7 @@
 <html lang="en-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>教师答疑系统</title>
+<title>课后辅导讨论系统</title>
 
 
 <style type="text/css">
@@ -70,37 +70,32 @@
 			<p class="lead">每个微小的个体， 都有发光的权利</p>
 			<p class="lead">
 				<a href="getting-started#download"
-					class="btn btn-outline-inverse btn-lg"">答疑</a>
+					class="btn btn-outline-inverse btn-lg"">课后辅导讨论</a>
 			</p>
 		</div>
 	</div>
 
 	<div class="bs-docs-featurette">
 		<div class="container">
-			<h2 class="bs-docs-featurette-title">为所有开发者、所有应用场景而设计。</h2>
-			<p class="lead">Bootstrap
-				让前端开发更快速、简单。所有开发者都能快速上手、所有设备都可以适配、所有项目都适用。</p>
+			<h2 class="bs-docs-featurette-title">为所有教师、学生而设计。</h2>
+			<p class="lead">AS-tutoring System    让学习更快速、简单。给教师与学生之间搭建一座及时沟通的桥梁。</p>
 
 			<hr class="half-rule">
 
 			<div class="row">
 				<div class="col-sm-4">
-					<h3>我要提问</h3>
+					<h3>我要回答</h3>
 					<p>
-						虽然可以直接使用 Bootstrap 提供的 CSS 样式表，不要忘记 Bootstrap 的源码是基于最流行的 CSS 预处理脚本
-						- <a href="../css/#less">Less</a> 和 <a href="../css/#sass">Sass</a>
-						开发的。你可以采用预编译的 CSS 文件快速开发，也可以从源码定制自己需要的样式。
+						用户在主界面可以看到所有人的发表的问题，如果你想对某一个问题发表自己的看法与见解，点击“我要回答”按钮就会跳转到回答该问题的界面，然后输入回答内容，点击发表，就可以成功发表自己的看法。
 					</p>
 				</div>
 				<div class="col-sm-4">
-					<h3>我要回答</h3>
-					<p>你的网站和应用能在 Bootstrap 的帮助下通过同一份代码快速、有效适配手机、平板、PC 设备，这一切都是 CSS
-						媒体查询（Media Query）的功劳。</p>
+					<h3>我要提问</h3>
+					<p>用户可以根据需要提出问题，在主界面中点击“我要提问”按钮就可以跳转到提出问题的界面，在界面中，输入问题的标题、内容，选择类型标签后即可发表，发布成功后所有用户就可以在问题列表中查看到该问题。</p>
 				</div>
 				<div class="col-sm-4">
-					<h3>个人中心</h3>
-					<p>Bootstrap 提供了全面、美观的文档。你能在这里找到关于 HTML 元素、HTML 和 CSS 组件、jQuery
-						插件方面的所有详细文档。</p>
+					<h3>与我相关</h3>
+					<p>该模块分为“我提出的”、“我回答的”两个子模块，用户可以查看自己所提出的所有问题列表或者所作出回答的问题列表。</p>
 				</div>
 			</div>
 		</div>
