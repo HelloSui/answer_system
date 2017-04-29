@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-<%@ include file="base.jsp"%>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -93,10 +92,12 @@ html {
 	display: inline-block;
 	width: 90%;
 	margin-right: 0;
-	border-radious: 0px;
+	border: 1px solid #d0d6d9;
+	padding-left: 5px;
 }
 
 .search-button {
+	position: relative;
 	display: inline-block;
 	background-color: #5cb85c;
 	color: #fff;
@@ -107,7 +108,9 @@ html {
 	text-align: center;
 	padding: 0;
 	text-decoration: none;
+	left: -1px;
 }
+
 .question-tags {
 	font-size: 14px;
 	padding: 0 9px;
@@ -119,11 +122,29 @@ html {
 	margin: 5px;
 	text-decoration: none !important;
 }
+
 .save {
-	border: 2px solid #f01400;
-	margin: 4px;
+	border: 1px solid #5cb85c;
+	margin: 5px;
 }
 
+.form-group>input:focus {
+	border: 1px solid #5cb85c;
+	outline: 0 !important;
+	box-shadow: none;
+}
+
+.classfy-tag:link, .classfy-tag:visited, .classfy-tag:hover,
+	.classfy-tag:active {
+	color: #fff;
+	text-decoration: none;
+}
+
+.search-button:link, .search-button:visited, .search-button:hover,
+	.search-button:active {
+	color: #fff;
+	text-decoration: none;
+}
 </style>
 </head>
 
@@ -283,13 +304,11 @@ html {
 	<div class="container main">
 		<form class="search-wraper" role="search">
 			<div class="form-group">
-				<input class="form-control search clearable"
-					placeholder="搜索开源库，例如：jquery" /><a href="javascript:void(0)"
-					class="search-button">搜索</a>
+				<input class="" id="search-content" placeholder="搜索开源库，例如：jquery" /><a
+					href="javascript:void(0)" class="search-button">搜索</a>
 			</div>
 		</form>
-		问题分类标签：
-		<div class="control-group">
+		<div class="control-group" style="text-align: center">
 			<c:forEach items="${allQuestionType}" var="item">
 				<a href="javascript:void(0)" id="${item.id}" class="question-tags"
 					id="1">${item.description }</a>
