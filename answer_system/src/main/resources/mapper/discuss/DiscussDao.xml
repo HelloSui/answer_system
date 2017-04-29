@@ -133,5 +133,13 @@
 		where d.speaker_id =  #{userId} and d.last_level = '0'
 		order by d.create_time desc
 	</select>   
-    
+	
+	 <select id="isExistAnswerOfQuestion" resultType="com.suixue.discuss.domain.Discuss">
+		SELECT 
+			d.id,
+		FROM
+			`discuss` d 
+		where d.question_id =  #{questionId}
+	</select>   
+	
 </mapper>

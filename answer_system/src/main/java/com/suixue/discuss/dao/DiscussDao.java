@@ -29,4 +29,11 @@ public interface DiscussDao extends BaseDao<Discuss> {
 	int queryAnswerNum(String questionId);
 	
 	List<Discuss> queryQuestionIdsOfOneAnswer(String userId);
+	
+	/**
+	 * 该问题是否被回答过
+	 * @param questionId
+	 * @return
+	 */
+	List<Discuss> isExistAnswerOfQuestion(String questionId);
 }

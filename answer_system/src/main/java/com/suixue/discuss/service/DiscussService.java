@@ -53,5 +53,14 @@ public class DiscussService extends BaseService<Discuss, BaseDao<Discuss>> {
 		}
 		return result;
 	}
+	public boolean isExistAnswerOfQuestion(String questionId){
+		List<Discuss> result = new ArrayList<>();
+		result = discussDao.isExistAnswerOfQuestion(questionId);
+		if(result == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 
