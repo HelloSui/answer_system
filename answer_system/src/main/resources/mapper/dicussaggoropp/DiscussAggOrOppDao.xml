@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.suixue.discussaggoropp.dao.DiscussAggOrOppDao">
 
-	<select id="get" resultType="com.suixue.discussaggoropp.domain.DiscussAggOrOpp">
+	<select id="get" resultType="com.suixue.dicussaggoropp.domain.DiscussAggOrOpp">
 		SELECT 
 			d.id,
 			d.discuss_id as "discussId",
@@ -22,7 +22,7 @@
 		order by d.create_time desc
 	</select>
 		
-	<insert id="insert" parameterType="com.suixue.discussaggoropp.domain.DiscussAggOrOpp">
+	<insert id="insert" parameterType="com.suixue.dicussaggoropp.domain.DiscussAggOrOpp">
 		INSERT INTO `discuss_agg_or_opp`(
 			`id`,
 			`discuss_id`,
