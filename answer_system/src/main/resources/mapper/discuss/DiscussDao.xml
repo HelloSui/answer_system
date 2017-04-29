@@ -140,6 +140,16 @@
 		FROM
 			`discuss` d 
 		where d.question_id =  #{questionId}
-	</select>   
+	</select> 
+	
+	 <select id="isExistReplyOfAnswer" resultType="com.suixue.discuss.domain.Discuss">
+		SELECT 
+			d.id,
+		FROM
+			`discuss` d 
+		where d.last_level =  #{discussId}
+	</select> 
+	
+	  
 	
 </mapper>

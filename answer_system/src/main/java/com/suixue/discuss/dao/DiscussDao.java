@@ -36,4 +36,6 @@ public interface DiscussDao extends BaseDao<Discuss> {
 	 * @return
 	 */
 	List<Discuss> isExistAnswerOfQuestion(String questionId);
+	
+	List<Discuss> isExistReplyOfAnswer(String discussId);
 }

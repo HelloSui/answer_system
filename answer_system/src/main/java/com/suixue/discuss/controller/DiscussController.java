@@ -106,27 +106,27 @@ public class DiscussController extends BaseController  {
 	}
 	
 	/**
-	 * 根据讨论id删除一条讨论记录
+	 * 根据讨论id删除一条讨论记录,前提是这个回答没有被回复过
 	 * @param discuss
 	 * @param model
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-//	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-//	@ResponseBody
-//	public BaseResponse delete(Discuss discuss, Model model, HttpServletRequest request,
-//			HttpServletResponse response) {
-//		if(discussService.isExistAnswerOfQuestion(question.getId())){
-//			BaseResponse rsp = new BaseResponse(ReturnCode.DELETE_ANSWER_FAILURE);
-//			return rsp ;
-//		}else{
-//			discussService.delete(discuss);	
-//			return success(discuss);
-//		}
-//		
-//		
-//	}
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResponse delete(Discuss discuss, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		if(discussService.isExistReplyOfAnswer(discuss.getId())){
+			BaseResponse rsp = new BaseResponse(ReturnCode.DELETE_ANSWER_FAILURE);
+			return rsp ;
+		}else{
+			discussService.delete(discuss);	
+			return success(discuss);
+		}
+		
+		
+	}
 	
 	/**
 	 * 删除某一个问题的所有讨论，请求参数为问题ID
